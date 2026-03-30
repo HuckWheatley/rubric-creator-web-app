@@ -182,3 +182,41 @@ textarea { resize: vertical; }
   .grid-2, .grid-3, .scale-grid, .descriptor-grid { grid-template-columns: 1fr; }
   .rubric-table { font-size: 11px; }
 }
+/* ── Course selector ── */
+.course-select {
+  font-size: 15px;
+  padding: 12px;
+}
+
+.course-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 10px 14px;
+  background-color: #f0ebe5;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.badge-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #27ae60;
+  flex-shrink: 0;
+}
+
+.badge-grade {
+  color: #888;
+  font-weight: normal;
+}
+
+/* ── Print header tag ── */
+.rubric-school-tag {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #999;
+  margin-bottom: 6px;
+}
