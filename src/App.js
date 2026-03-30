@@ -1,23 +1,391 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
+const HKIS_LEVELS = [
+  {
+    name: 'Emerging',
+    color: '#e8f4fd',
+    borderColor: '#3498db',
+    description: 'Demonstrates emerging proficiency in the standard.'
+  },
+  {
+    name: 'Developing',
+    color: '#fef9e7',
+    borderColor: '#f39c12',
+    description: 'Demonstrates foundational knowledge but not yet exhibiting proficiency.'
+  },
+  {
+    name: 'Exhibiting',
+    color: '#eafaf1',
+    borderColor: '#27ae60',
+    description: 'Exhibits proficiency — demonstrates targeted understanding of knowledge and skills.'
+  },
+  {
+    name: 'Exhibiting Depth',
+    color: '#f4ecf7',
+    borderColor: '#8e44ad',
+    description: 'Transfers learning to authentic situations with creativity and sophistication.'
+  }
+];
+
+const HUMANITIES_10_OUTCOMES = {
+  'English Language Arts': [
+    'Analyze complex literary and informational texts for themes of ethics, power, and identity',
+    "Evaluate author's purpose, tone, and rhetorical strategies",
+    'Compose thesis-driven analytical essays and position papers with counterclaims',
+    'Create narrative and multimedia compositions using stylistic techniques',
+    'Apply advanced academic writing conventions including MLA citation',
+    'Engage in Socratic seminars and structured debates using evidence-based reasoning',
+    'Conduct sustained research projects synthesizing credible sources'
+  ],
+  'Social Studies': [
+    'Investigate how power and access shape historical narratives across cultures',
+    'Interpret artistic expression as historical and cultural evidence',
+    'Analyze ethical dilemmas in global decision-making',
+    'Evaluate multiple perspectives on social change, activism, and policy-making',
+    'Examine storytelling and art as tools for resistance and social movements',
+    'Identify patterns of inequality through data and historical case studies',
+    'Apply research and inquiry skills to explore global issues'
+  ]
+};
+
+const ASSESSMENT_TYPES = [
+  'Analytical Essay',
+  'Timed In-Class Writing',
+  'Research Project',
+  'Oral Presentation',
+  'Socratic Seminar',
+  'Structured Debate',
+  'Multimedia Composition',
+  'Journal Response',
+  'Group Project',
+  'Position Paper'
+];
+
 function App() {
+  const [activeTab, setActiveTab] = useState('build');
+  const [rubricTitle, setRubricTitle] = useState('');
+  const [assignmentType, setAssignmentType] = useState('');
+  const [teacherName, setTeacherName] = useState('');
+  const [criteria, setCriteria] = useState([
+    {
+      id: 1,
+      name: '',
+      learningOutcome: '',
+      descriptors: {
+        Emerging: '',
+        Developing: '',
+        Exhibiting: '',
+        'Exhibiting Depth': ''
+      }
+    }
+  ]);
+
+  const addCriterion = () => {
+    setCriteria([
+      ...criteria,
+      {
+        id: Date.now(),
+        name: '',
+        learningOutcome: '',
+        descriptors: {
+          Emerging: '',
+          Developing: '',
+          Exhibiting: '',
+          'Exhibiting Depth': ''
+        }
+      }
+    ]);
+  };
+
+  const removeCriterion = (id) => {
+    if (criteria.length > 1) setCriteria(criteria.filter((c) => c.id !== id));
+  };
+
+  const updateCriterion = (id, field, value) => {
+    setCriteria(criteria.map((c) => (c.id === id ? { ...c, [field]: value } : c)));
+  };
+
+  const updateDescriptor = (id, level, value) => {
+    setCriteria(
+      criteria.map((c) =>
+        c.id === id
+          ? { ...c, descriptors: { ...c.descriptors, [level]: value } }
+          : c
+      )
+    );
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-wrapper">
+      {/* ── Header ── */}
+      <div className="header">
+        <h1>HKIS Rubric Creator</h1>
+        <p>Humanities 10: English &amp; Social Studies</p>
+      </div>
+
+      {/* ── Tabs ── */}
+      <div className="tabs">
+        {['build', 'preview'].map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+          >
+            {tab === 'build' ? '📝 Build Rubric' : '👁️ Preview & Print'}
+          </button>
+        ))}
+      </div>
+
+      {/* ══════════════ BUILD TAB ══════════════ */}
+      {activeTab === 'build' && (
+        <div>
+          {/* Rubric Details */}
+          <div className="card">
+            <h2 className="card-title">Rubric Details</h2>
+            <div className="grid-3">
+              <div className="field">
+                <label>Assignment / Task Title</label>
+                <input
+                  value={rubricTitle}
+                  onChange={(e) => setRubricTitle(e.target.value)}
+                  placeholder="e.g., Analytical Essay: Power & Identity"
+                />
+              </div>
+              <div className="field">
+                <label>Assessment Type</label>
+                <select
+                  value={assignmentType}
+                  onChange={(e) => setAssignmentType(e.target.value)}
+                >
+                  <option value="">Select type…</option>
+                  {ASSESSMENT_TYPES.map((t) => (
+                    <option key={t}>{t}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="field">
+                <label>Teacher Name</label>
+                <input
+                  value={teacherName}
+                  onChange={(e) => setTeacherName(e.target.value)}
+                  placeholder="e.g., Ms. Chan"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Scale Reference */}
+          <div className="card">
+            <h2 className="card-title">HKIS General Academic Scale</h2>
+            <div className="scale-grid">
+              {HKIS_LEVELS.map((level) => (
+                <div
+                  key={level.name}
+                  className="scale-box"
+                  style={{
+                    backgroundColor: level.color,
+                    borderLeft: `4px solid ${level.borderColor}`
+                  }}
+                >
+                  <div
+                    className="scale-name"
+                    style={{ color: level.borderColor }}
+                  >
+                    {level.name}
+                  </div>
+                  <div className="scale-desc">{level.description}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Criteria */}
+          <div className="criteria-header">
+            <h2 className="card-title" style={{ margin: 0 }}>
+              Assessment Criteria
+            </h2>
+            <button className="btn-primary" onClick={addCriterion}>
+              + Add Criterion
+            </button>
+          </div>
+
+          {criteria.map((criterion, index) => (
+            <div key={criterion.id} className="card criterion-card">
+              <div className="criterion-top">
+                <span className="criterion-label">Criterion {index + 1}</span>
+                {criteria.length > 1 && (
+                  <button
+                    className="remove-btn"
+                    onClick={() => removeCriterion(criterion.id)}
+                  >
+                    ✕ Remove
+                  </button>
+                )}
+              </div>
+
+              <div className="grid-2" style={{ marginBottom: '16px' }}>
+                <div className="field">
+                  <label>Criterion Name</label>
+                  <input
+                    value={criterion.name}
+                    onChange={(e) =>
+                      updateCriterion(criterion.id, 'name', e.target.value)
+                    }
+                    placeholder="e.g., Thesis & Argument, Use of Evidence…"
+                  />
+                </div>
+                <div className="field">
+                  <label>Linked Learning Outcome</label>
+                  <select
+                    value={criterion.learningOutcome}
+                    onChange={(e) =>
+                      updateCriterion(
+                        criterion.id,
+                        'learningOutcome',
+                        e.target.value
+                      )
+                    }
+                  >
+                    <option value="">Select a learning outcome…</option>
+                    {Object.entries(HUMANITIES_10_OUTCOMES).map(
+                      ([subject, outcomes]) => (
+                        <optgroup key={subject} label={subject}>
+                          {outcomes.map((o) => (
+                            <option key={o} value={o}>
+                              {o}
+                            </option>
+                          ))}
+                        </optgroup>
+                      )
+                    )}
+                  </select>
+                </div>
+              </div>
+
+              <div className="descriptor-grid">
+                {HKIS_LEVELS.map((level) => (
+                  <div key={level.name}>
+                    <label
+                      className="level-label"
+                      style={{ color: level.borderColor }}
+                    >
+                      {level.name}
+                    </label>
+                    <textarea
+                      value={criterion.descriptors[level.name]}
+                      onChange={(e) =>
+                        updateDescriptor(
+                          criterion.id,
+                          level.name,
+                          e.target.value
+                        )
+                      }
+                      placeholder={`What does ${level.name} look like here?`}
+                      rows={5}
+                      style={{
+                        backgroundColor: level.color,
+                        borderColor: level.borderColor
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <div className="center-btn">
+            <button
+              className="btn-primary btn-large"
+              onClick={() => setActiveTab('preview')}
+            >
+              Preview Rubric →
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ══════════════ PREVIEW TAB ══════════════ */}
+      {activeTab === 'preview' && (
+        <div>
+          <div className="preview-header">
+            <h2 className="card-title" style={{ margin: 0 }}>
+              Rubric Preview
+            </h2>
+            <button className="btn-dark" onClick={() => window.print()}>
+              🖨️ Print Rubric
+            </button>
+          </div>
+
+          <div className="card printable" id="printable-rubric">
+            {/* Rubric Header */}
+            <div className="rubric-header-block">
+              <h1 className="rubric-main-title">
+                {rubricTitle || 'Untitled Rubric'}
+              </h1>
+              <p className="rubric-meta">
+                HKIS Humanities 10: English &amp; Social Studies
+                {assignmentType && ` · ${assignmentType}`}
+                {teacherName && ` · ${teacherName}`}
+              </p>
+            </div>
+
+            {/* Table */}
+            <table className="rubric-table">
+              <thead>
+                <tr>
+                  <th className="th-criterion">Criterion</th>
+                  {HKIS_LEVELS.map((level) => (
+                    <th
+                      key={level.name}
+                      style={{ backgroundColor: level.borderColor }}
+                    >
+                      {level.name}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {criteria.map((criterion, index) => (
+                  <tr
+                    key={criterion.id}
+                    style={{
+                      backgroundColor: index % 2 === 0 ? '#faf8f5' : 'white'
+                    }}
+                  >
+                    <td className="td-criterion">
+                      <div className="criterion-name">
+                        {criterion.name || `Criterion ${index + 1}`}
+                      </div>
+                      {criterion.learningOutcome && (
+                        <div className="criterion-outcome">
+                          {criterion.learningOutcome}
+                        </div>
+                      )}
+                    </td>
+                    {HKIS_LEVELS.map((level) => (
+                      <td
+                        key={level.name}
+                        className="td-descriptor"
+                        style={{ borderLeft: `3px solid ${level.borderColor}` }}
+                      >
+                        {criterion.descriptors[level.name] || (
+                          <span className="empty-descriptor">—</span>
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <div className="scale-footer">
+              <strong>HKIS General Academic Scale:</strong> Emerging →
+              Developing → Exhibiting → Exhibiting Depth
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

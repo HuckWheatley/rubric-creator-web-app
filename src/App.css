@@ -1,38 +1,184 @@
-.App {
+/* ── Base ── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Georgia, serif;
+  background-color: #faf8f5;
+  color: #333;
+}
+
+.app-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* ── Header ── */
+.header {
+  background-color: #8b1a1a;
+  color: white;
+  padding: 24px 28px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.header h1 { font-size: 26px; font-weight: normal; margin-bottom: 4px; }
+.header p  { opacity: 0.85; font-size: 15px; }
+
+/* ── Tabs ── */
+.tabs { display: flex; gap: 8px; margin-bottom: 24px; }
+.tab-btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  background-color: #e8e0d8;
+  color: #333;
+  transition: background 0.2s;
+}
+.tab-btn.active { background-color: #8b1a1a; color: white; font-weight: bold; }
+
+/* ── Cards ── */
+.card {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}
+.card-title { color: #8b1a1a; font-size: 18px; font-weight: normal; margin-bottom: 16px; }
+
+/* ── Fields ── */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 13px; font-weight: bold; color: #555; }
+input, select, textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: Georgia, serif;
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+input:focus, select:focus, textarea:focus { border-color: #8b1a1a; }
+textarea { resize: vertical; }
+
+/* ── Grids ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.scale-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.descriptor-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+/* ── Scale boxes ── */
+.scale-box { padding: 12px; border-radius: 4px; }
+.scale-name { font-weight: bold; font-size: 14px; margin-bottom: 6px; }
+.scale-desc { font-size: 12px; color: #555; line-height: 1.5; }
+
+/* ── Criteria ── */
+.criteria-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.criterion-card { border-top: 3px solid #8b1a1a; }
+.criterion-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.criterion-label { font-weight: bold; color: #8b1a1a; font-size: 15px; }
+.level-label { display: block; font-weight: bold; font-size: 13px; margin-bottom: 6px; }
+
+/* ── Buttons ── */
+.btn-primary {
+  padding: 10px 22px;
+  background-color: #8b1a1a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: Georgia, serif;
+  font-size: 14px;
+}
+.btn-primary:hover { background-color: #6e1414; }
+.btn-large { padding: 14px 40px; font-size: 16px; }
+.btn-dark {
+  padding: 10px 22px;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: Georgia, serif;
+  font-size: 14px;
+}
+.remove-btn {
+  background: none;
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
+  border-radius: 4px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: Georgia, serif;
+}
+.remove-btn:hover { background: #fdecea; }
+.center-btn { text-align: center; margin-top: 24px; }
+
+/* ── Preview ── */
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.rubric-header-block {
+  border-bottom: 3px solid #8b1a1a;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+.rubric-main-title { font-size: 22px; color: #8b1a1a; font-weight: normal; margin-bottom: 4px; }
+.rubric-meta { font-size: 13px; color: #777; }
+
+/* ── Rubric Table ── */
+.rubric-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.rubric-table thead th {
+  padding: 12px;
+  color: white;
+  font-weight: normal;
+  font-size: 14px;
   text-align: center;
 }
+.th-criterion { background-color: #8b1a1a !important; text-align: left !important; width: 18%; }
+.td-criterion { padding: 14px; border-bottom: 1px solid #e8e0d8; vertical-align: top; width: 18%; }
+.td-descriptor { padding: 14px; border-bottom: 1px solid #e8e0d8; vertical-align: top; line-height: 1.5; }
+.criterion-name { font-weight: bold; margin-bottom: 4px; }
+.criterion-outcome { font-size: 11px; color: #888; font-style: italic; line-height: 1.4; }
+.empty-descriptor { color: #bbb; font-style: italic; }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.scale-footer {
+  margin-top: 20px;
+  padding: 10px 14px;
+  background-color: #f4ecf7;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #555;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* ── Print ── */
+@media print {
+  .tabs, .preview-header, .btn-dark { display: none !important; }
+  .app-wrapper { padding: 0; }
+  .card.printable { box-shadow: none; padding: 0; }
+  body { background: white; }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .scale-grid, .descriptor-grid { grid-template-columns: 1fr; }
+  .rubric-table { font-size: 11px; }
 }
