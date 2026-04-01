@@ -74,56 +74,6 @@ const COURSES = {
         'Apply research and inquiry skills to explore global issues'
       ]
     }
-  },
-  'Junior English': {
-    grade: '11',
-    outcomes: {
-      'Learning Outcomes': [
-        'Connect literature to life',
-        'Recognize the social/historical context of literature',
-        'Learn to analyze a variety of literary texts',
-        'Explain and defend a point of view by substantiating ideas with accurate and relevant detail',
-        'Develop an understanding of the power of writing and images to transform human experience',
-        'Work towards establishing a personal voice and writing style in a variety of media',
-        'Contribute to and learn from class and group discussions',
-        'Speak articulately and confidently to an audience'
-      ]
-    }
-  },
-  'Senior English': {
-    grade: '12',
-    outcomes: {
-      'Learning Outcomes': [
-        'Communicate clearly and strategically in writing and orally for a variety of audiences, contexts, and purposes',
-        'Engage with challenging and diverse forms of text, and grapple with complex perspectives across time and place',
-        'Construct logical, robust, and informed arguments, assess the validity of their own thinking, and consider the merits of others\' arguments',
-        'Engage in the analysis of rhetorical and literary techniques and stylistic features employed by authors and speakers',
-        'Engage in writing and text production as process, including self-reflection, peer-assessment, and revision'
-      ]
-    }
-  },
-  'AP English Language & Composition': {
-    grade: '11, 12',
-    outcomes: {
-      'Learning Outcomes': [
-        'Develop formal and informal writing in the forms of narrative, expository, analytical, and argumentative pieces',
-        'Demonstrate independent response and critical thinking about various concepts',
-        'Develop an understanding of nonfiction writing and how an author can use various rhetorical techniques to craft an argument',
-        'Work toward establishing a personal voice and writing style by practicing the writing process (prewriting, drafting, editing, revising, and publishing)',
-        'Develop research skills and the ability to evaluate, use, and cite primary and secondary sources'
-      ]
-    }
-  },
-  'AP English Literature & Composition': {
-    grade: '11, 12',
-    outcomes: {
-      'Learning Outcomes': [
-        'Write to understand, to explain, and to evaluate literature',
-        'Demonstrate independent response and critical thinking about various texts and concepts',
-        'Work towards establishing a personal voice and writing style by practicing the writing process; practice various genres of writing including imaginative, persuasive, reflective, descriptive, and analytical',
-        'Develop skills of analysis, synthesis, and evaluation through the appreciation and examination of how language is used in poetry, fiction, and drama'
-      ]
-    }
   }
 };
 
@@ -203,12 +153,15 @@ function App() {
   };
 
   return (
+    
+<div> 
+    <div className="header">
+        <h1>HKIS Rubric Creator</h1>
+      </div>
+
+
     <div className="app-wrapper">
       {/* ── Header ── */}
-      <div className="header">
-        <h1>HKIS Rubric Creator</h1>
-        <p>Humanities Department</p>
-      </div>
 
       {/* ── Tabs ── */}
       <div className="tabs">
@@ -242,16 +195,6 @@ function App() {
                 </optgroup>
                 <optgroup label="Grade 10">
                   <option>Humanities 10: English &amp; Social Studies</option>
-                </optgroup>
-                <optgroup label="Grade 11">
-                  <option>Junior English</option>
-                </optgroup>
-                <optgroup label="Grade 12">
-                  <option>Senior English</option>
-                </optgroup>
-                <optgroup label="AP Courses (Grades 11–12)">
-                  <option>AP English Language &amp; Composition</option>
-                  <option>AP English Literature &amp; Composition</option>
                 </optgroup>
               </select>
             </div>
@@ -519,7 +462,9 @@ function App() {
         </div>
       )}
     </div>
+    </div>    
   );
+  
 }
 
 export default App;

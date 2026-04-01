@@ -2,7 +2,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: Georgia, serif;
+  font-family: Avenir, sans-serif;
   background-color: #faf8f5;
   color: #333;
 }
@@ -15,10 +15,10 @@ body {
 
 /* ── Header ── */
 .header {
-  background-color: #8b1a1a;
+  background-color: rgb(1, 42, 66);
   color: white;
   padding: 24px 28px;
-  border-radius: 8px;
+  font-weight: bold;
   margin-bottom: 20px;
 }
 .header h1 { font-size: 26px; font-weight: normal; margin-bottom: 4px; }
@@ -31,13 +31,13 @@ body {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-family: Georgia, serif;
+  font-family: Avenir, sans-serif;
   font-size: 15px;
   background-color: #e8e0d8;
   color: #333;
   transition: background 0.2s;
 }
-.tab-btn.active { background-color: #8b1a1a; color: white; font-weight: bold; }
+.tab-btn.active { background-color: rgb(1, 42, 66); color: white; font-weight: bold; }
 
 /* ── Cards ── */
 .card {
@@ -56,7 +56,7 @@ input, select, textarea {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  font-family: Georgia, serif;
+  font-family: Avenir, sans-serif;
   font-size: 14px;
   width: 100%;
   outline: none;
@@ -96,15 +96,15 @@ textarea { resize: vertical; }
 /* ── Buttons ── */
 .btn-primary {
   padding: 10px 22px;
-  background-color: #8b1a1a;
+  background-color: #012a42;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-family: Georgia, serif;
+  font-family: Avenir, sans-serif;
   font-size: 14px;
 }
-.btn-primary:hover { background-color: #6e1414; }
+.btn-primary:hover { background-color: rgb(0, 65, 103); }
 .btn-large { padding: 14px 40px; font-size: 16px; }
 .btn-dark {
   padding: 10px 22px;
@@ -113,7 +113,7 @@ textarea { resize: vertical; }
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-family: Georgia, serif;
+  font-family: Avenir, sans-serif;
   font-size: 14px;
 }
 .remove-btn {
@@ -124,7 +124,7 @@ textarea { resize: vertical; }
   padding: 4px 10px;
   cursor: pointer;
   font-size: 13px;
-  font-family: Georgia, serif;
+  font-family: Avenir, sans-serif;
 }
 .remove-btn:hover { background: #fdecea; }
 .center-btn { text-align: center; margin-top: 24px; }
@@ -137,11 +137,11 @@ textarea { resize: vertical; }
   margin-bottom: 16px;
 }
 .rubric-header-block {
-  border-bottom: 3px solid #8b1a1a;
+  border-bottom: 3px solid #012a42;
   padding-bottom: 16px;
   margin-bottom: 20px;
 }
-.rubric-main-title { font-size: 22px; color: #8b1a1a; font-weight: normal; margin-bottom: 4px; }
+.rubric-main-title { font-size: 22px; color: #012a42; font-weight: normal; margin-bottom: 4px; }
 .rubric-meta { font-size: 13px; color: #777; }
 
 /* ── Rubric Table ── */
