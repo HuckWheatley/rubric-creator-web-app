@@ -132,7 +132,7 @@ function App() {
         }
       }
     ]);
-  };
+  }; 
 
   const removeCriterion = (id) => {
     if (criteria.length > 1) setCriteria(criteria.filter((c) => c.id !== id));
@@ -362,6 +362,7 @@ function App() {
                         borderColor: level.borderColor
                       }}
                     />
+                    
                   </div>
                 ))}
               </div>
