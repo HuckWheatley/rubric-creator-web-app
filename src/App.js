@@ -95,25 +95,180 @@ const ASSESSMENT_TYPES = [
   'Synthesis Essay'
 ];
 
+const ASSESSMENT_CRITERIA_TEMPLATES = {
+  'Analytical Essay': [
+    {
+      name: 'Thesis & Insight',
+      keywords: ['theme', 'purpose', 'point of view', 'perspective'],
+      workLooksLike:
+        'a clear, arguable thesis that shows insight into the text and task'
+    },
+    {
+      name: 'Evidence & Reasoning',
+      keywords: ['textual evidence', 'synthesize', 'compare', 'credible sources'],
+      workLooksLike:
+        'well-selected evidence that is explained and connected to the claim'
+    },
+    {
+      name: 'Organization & Style',
+      keywords: ['writing', 'formal tone', 'sentence structures', 'conventions'],
+      workLooksLike:
+        'a logical structure, strong paragraphing, and academic voice throughout'
+    },
+    {
+      name: 'Conventions & Citation',
+      keywords: ['MLA citation', 'academic writing conventions', 'citation'],
+      workLooksLike:
+        'accurate grammar, precise language, and correct citation format'
+    }
+  ],
+  'Research Project': [
+    {
+      name: 'Research Question & Focus',
+      keywords: ['research', 'inquiry', 'global issues', 'ethical dilemmas'],
+      workLooksLike:
+        'a focused question and sustained investigation of a meaningful issue'
+    },
+    {
+      name: 'Source Quality & Integration',
+      keywords: ['credible sources', 'synthesizing', 'historical sources'],
+      workLooksLike:
+        'credible sources integrated smoothly and interpreted accurately'
+    },
+    {
+      name: 'Analysis & Synthesis',
+      keywords: ['analyze', 'evaluate', 'multiple perspectives'],
+      workLooksLike:
+        'analysis that goes beyond summary and connects ideas across sources'
+    },
+    {
+      name: 'Communication & Presentation',
+      keywords: ['communicate ideas effectively', 'multimedia', 'presentations'],
+      workLooksLike:
+        'clear communication, polished visuals, and effective delivery to audience'
+    }
+  ],
+  'Oral Presentation': [
+    {
+      name: 'Content Accuracy & Depth',
+      keywords: ['analyze', 'interpret', 'evaluate', 'case studies'],
+      workLooksLike:
+        'accurate content with depth, nuance, and relevant supporting detail'
+    },
+    {
+      name: 'Use of Evidence',
+      keywords: ['textual evidence', 'credible sources', 'historical sources'],
+      workLooksLike:
+        'specific evidence selected and explained to strengthen key points'
+    },
+    {
+      name: 'Organization & Clarity',
+      keywords: ['communicate ideas effectively', 'structured debates'],
+      workLooksLike:
+        'a well-paced structure with clear transitions and logical flow'
+    },
+    {
+      name: 'Delivery & Audience Engagement',
+      keywords: ['oral presentations', 'collaborative discussions'],
+      workLooksLike:
+        'confident delivery, purposeful eye contact, and active audience engagement'
+    }
+  ]
+};
+
+const DEFAULT_ASSESSMENT_CRITERIA = [
+  {
+    name: 'Knowledge & Understanding',
+    keywords: ['analyze', 'interpret', 'explain'],
+    workLooksLike: 'accurate understanding of key concepts and ideas from the course'
+  },
+  {
+    name: 'Application of Skills',
+    keywords: ['apply', 'communicate', 'research', 'discussion'],
+    workLooksLike: 'effective use of the target skill in the context of the task'
+  },
+  {
+    name: 'Reasoning & Evidence',
+    keywords: ['evidence', 'evaluate', 'synthesize', 'perspectives'],
+    workLooksLike:
+      'reasoning supported with relevant evidence and clear explanation'
+  },
+  {
+    name: 'Communication & Conventions',
+    keywords: ['writing', 'presentation', 'conventions', 'citation'],
+    workLooksLike:
+      'clear communication with appropriate structure, tone, and conventions'
+  }
+];
+
+const EMPTY_CRITERION = {
+  id: 1,
+  name: '',
+  learningOutcome: '',
+  descriptors: {
+    Emerging: '',
+    Developing: '',
+    Exhibiting: '',
+    'Exhibiting Depth': ''
+  }
+};
+
+const descriptorTextByLevel = (workLooksLike) => ({
+  Emerging:
+    `Work shows early attempts at ${workLooksLike}; support is needed to meet task expectations.`,
+  Developing:
+    `Work demonstrates partial control of ${workLooksLike}; consistency and depth are still developing.`,
+  Exhibiting:
+    `Work consistently demonstrates ${workLooksLike} at the expected course standard.`,
+  'Exhibiting Depth':
+    `Work demonstrates sophisticated, transferable ${workLooksLike} with originality and precision.`
+});
+
+const findBestOutcomeMatch = (allOutcomes, keywords, usedOutcomes) => {
+  const normalizedKeywords = keywords.map((k) => k.toLowerCase());
+
+  const directMatch = allOutcomes.find(
+    (outcome) =>
+      !usedOutcomes.has(outcome) &&
+      normalizedKeywords.some((keyword) => outcome.toLowerCase().includes(keyword))
+  );
+
+  if (directMatch) return directMatch;
+
+  return allOutcomes.find((outcome) => !usedOutcomes.has(outcome)) || '';
+};
+
+const buildCriteriaFromAssessment = (type, course) => {
+  const templates =
+    ASSESSMENT_CRITERIA_TEMPLATES[type] || DEFAULT_ASSESSMENT_CRITERIA;
+  const allOutcomes = course ? Object.values(course.outcomes).flat() : [];
+  const usedOutcomes = new Set();
+
+  return templates.map((template, index) => {
+    const matchedOutcome = findBestOutcomeMatch(
+      allOutcomes,
+      template.keywords,
+      usedOutcomes
+    );
+
+    if (matchedOutcome) usedOutcomes.add(matchedOutcome);
+
+    return {
+      id: Date.now() + index,
+      name: template.name,
+      learningOutcome: matchedOutcome,
+      descriptors: descriptorTextByLevel(template.workLooksLike)
+    };
+  });
+};
+
 function App() {
   const [activeTab, setActiveTab] = useState('build');
   const [selectedCourse, setSelectedCourse] = useState('');
   const [rubricTitle, setRubricTitle] = useState('');
   const [assignmentType, setAssignmentType] = useState('');
   const [teacherName, setTeacherName] = useState('');
-  const [criteria, setCriteria] = useState([
-    {
-      id: 1,
-      name: '',
-      learningOutcome: '',
-      descriptors: {
-        Emerging: '',
-        Developing: '',
-        Exhibiting: '',
-        'Exhibiting Depth': ''
-      }
-    }
-  ]);
+  const [criteria, setCriteria] = useState([EMPTY_CRITERION]);
 
   const currentCourse = COURSES[selectedCourse] || null;
 
@@ -150,6 +305,17 @@ function App() {
           : c
       )
     );
+  };
+
+  const handleAssessmentTypeChange = (value) => {
+    setAssignmentType(value);
+
+    if (!value) {
+      setCriteria([EMPTY_CRITERION]);
+      return;
+    }
+
+    setCriteria(buildCriteriaFromAssessment(value, currentCourse));
   };
 
   return (
@@ -225,7 +391,7 @@ function App() {
                 <label>Assessment Type</label>
                 <select
                   value={assignmentType}
-                  onChange={(e) => setAssignmentType(e.target.value)}
+                  onChange={(e) => handleAssessmentTypeChange(e.target.value)}
                 >
                   <option value="">Select type…</option>
                   {ASSESSMENT_TYPES.map((t) => (
