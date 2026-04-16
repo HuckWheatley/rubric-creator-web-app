@@ -32,46 +32,50 @@ const COURSES = {
   'Humanities 9: English & Social Studies': {
     grade: '9',
     outcomes: {
-      'English Language Arts': [
-        'Analyze literary and informational texts for theme, author\'s purpose, and point of view, citing textual evidence',
-        'Interpret bias and perspective in texts and media, considering context and audience',
-        'Compare and synthesize ideas across multiple texts to identify cultural values and patterns',
-        'Communicate ideas effectively through multiple modes including analytical essays, oral presentations, and multimedia',
-        'Apply conventions of academic writing, including MLA citation, formal tone, and varied sentence structures',
-        'Engage in collaborative discussions and oral presentations, building on others\' ideas and expressing viewpoints clearly',
-        'Conduct short research tasks, integrating credible sources into writing and presentations'
+      'Comprehension and Analysis': [
+        'Analyzing Ideas and Themes',
+        'Analyzing Text Organization and Structure',
+        'Analyzing Language'
       ],
-      'Social Studies': [
-        'Explain how geography and migration patterns influence settlement and cultural development',
-        'Investigate why societies create systems and analyze how these reflect values and ideologies',
-        'Evaluate how systems adapt to changing needs and mediate interactions among competing worldviews',
-        'Analyze major turning points in history for shifts in power and unintended consequences',
-        'Assess alternative definitions of progress, including sustainability and social equity',
-        'Interpret historical sources and connect them to conceptual themes (identity, systems, progress)',
-        'Use case studies to understand continuity, change, and cause-effect relationships in global contexts'
+      'Composition and Communication': [
+       'Generating Text Organization and Structure',
+       'Generating Claims, Evidence, and Reasoning',
+       'Style and Revision'
+      ],
+      'Understanding and Applying Concepts': [
+        'Civics and Citizenship',
+        'Economics, Trade, and Markets',
+        'Place, Space, and Human - Environment Interaction',
+        'Change, Continuity, and Perspectives',,
+      ],
+      'Inquiry and Action':[
+        'Researching and Inquiring',
+        'Communicating Conclusions and Taking Action'
       ]
     }
   },
   'Humanities 10: English & Social Studies': {
     grade: '10',
     outcomes: {
-      'English Language Arts': [
-        'Analyze complex literary and informational texts for themes of ethics, power, and identity',
-        'Evaluate author\'s purpose, tone, and rhetorical strategies',
-        'Compose thesis-driven analytical essays and position papers with counterclaims',
-        'Create narrative and multimedia compositions using stylistic techniques',
-        'Apply advanced academic writing conventions including MLA citation',
-        'Engage in Socratic seminars and structured debates using evidence-based reasoning',
-        'Conduct sustained research projects synthesizing credible sources'
+      'Comprehension and Analysis': [
+        'Analyzing Ideas and Themes',
+        'Analyzing Text Organization and Structure',
+        'Analyzing Language'
       ],
-      'Social Studies': [
-        'Investigate how power and access shape historical narratives across cultures',
-        'Interpret artistic expression as historical and cultural evidence',
-        'Analyze ethical dilemmas in global decision-making',
-        'Evaluate multiple perspectives on social change, activism, and policy-making',
-        'Examine storytelling and art as tools for resistance and social movements',
-        'Identify patterns of inequality through data and historical case studies',
-        'Apply research and inquiry skills to explore global issues'
+      'Composition and Communication': [
+       'Generating Text Organization and Structure',
+       'Generating Claims, Evidence, and Reasoning',
+       'Style and Revision'
+      ],
+      'Understanding and Applying Concepts': [
+        'Civics and Citizenship',
+        'Economics, Trade, and Markets',
+        'Place, Space, and Human - Environment Interaction',
+        'Change, Continuity, and Perspectives',,
+      ],
+      'Inquiry and Action':[
+        'Researching and Inquiring',
+        'Communicating Conclusions and Taking Action'
       ]
     }
   }
@@ -95,115 +99,10 @@ const ASSESSMENT_TYPES = [
   'Synthesis Essay'
 ];
 
-const ASSESSMENT_CRITERIA_TEMPLATES = {
-  'Analytical Essay': [
-    {
-      name: 'Thesis & Insight',
-      keywords: ['theme', 'purpose', 'point of view', 'perspective'],
-      workLooksLike:
-        'a clear, arguable thesis that shows insight into the text and task'
-    },
-    {
-      name: 'Evidence & Reasoning',
-      keywords: ['textual evidence', 'synthesize', 'compare', 'credible sources'],
-      workLooksLike:
-        'well-selected evidence that is explained and connected to the claim'
-    },
-    {
-      name: 'Organization & Style',
-      keywords: ['writing', 'formal tone', 'sentence structures', 'conventions'],
-      workLooksLike:
-        'a logical structure, strong paragraphing, and academic voice throughout'
-    },
-    {
-      name: 'Conventions & Citation',
-      keywords: ['MLA citation', 'academic writing conventions', 'citation'],
-      workLooksLike:
-        'accurate grammar, precise language, and correct citation format'
-    }
-  ],
-  'Research Project': [
-    {
-      name: 'Research Question & Focus',
-      keywords: ['research', 'inquiry', 'global issues', 'ethical dilemmas'],
-      workLooksLike:
-        'a focused question and sustained investigation of a meaningful issue'
-    },
-    {
-      name: 'Source Quality & Integration',
-      keywords: ['credible sources', 'synthesizing', 'historical sources'],
-      workLooksLike:
-        'credible sources integrated smoothly and interpreted accurately'
-    },
-    {
-      name: 'Analysis & Synthesis',
-      keywords: ['analyze', 'evaluate', 'multiple perspectives'],
-      workLooksLike:
-        'analysis that goes beyond summary and connects ideas across sources'
-    },
-    {
-      name: 'Communication & Presentation',
-      keywords: ['communicate ideas effectively', 'multimedia', 'presentations'],
-      workLooksLike:
-        'clear communication, polished visuals, and effective delivery to audience'
-    }
-  ],
-  'Oral Presentation': [
-    {
-      name: 'Content Accuracy & Depth',
-      keywords: ['analyze', 'interpret', 'evaluate', 'case studies'],
-      workLooksLike:
-        'accurate content with depth, nuance, and relevant supporting detail'
-    },
-    {
-      name: 'Use of Evidence',
-      keywords: ['textual evidence', 'credible sources', 'historical sources'],
-      workLooksLike:
-        'specific evidence selected and explained to strengthen key points'
-    },
-    {
-      name: 'Organization & Clarity',
-      keywords: ['communicate ideas effectively', 'structured debates'],
-      workLooksLike:
-        'a well-paced structure with clear transitions and logical flow'
-    },
-    {
-      name: 'Delivery & Audience Engagement',
-      keywords: ['oral presentations', 'collaborative discussions'],
-      workLooksLike:
-        'confident delivery, purposeful eye contact, and active audience engagement'
-    }
-  ]
-};
-
-const DEFAULT_ASSESSMENT_CRITERIA = [
-  {
-    name: 'Knowledge & Understanding',
-    keywords: ['analyze', 'interpret', 'explain'],
-    workLooksLike: 'accurate understanding of key concepts and ideas from the course'
-  },
-  {
-    name: 'Application of Skills',
-    keywords: ['apply', 'communicate', 'research', 'discussion'],
-    workLooksLike: 'effective use of the target skill in the context of the task'
-  },
-  {
-    name: 'Reasoning & Evidence',
-    keywords: ['evidence', 'evaluate', 'synthesize', 'perspectives'],
-    workLooksLike:
-      'reasoning supported with relevant evidence and clear explanation'
-  },
-  {
-    name: 'Communication & Conventions',
-    keywords: ['writing', 'presentation', 'conventions', 'citation'],
-    workLooksLike:
-      'clear communication with appropriate structure, tone, and conventions'
-  }
-];
-
 const EMPTY_CRITERION = {
   id: 1,
   name: '',
+  reportingCategory: '',
   learningOutcome: '',
   descriptors: {
     Emerging: '',
@@ -213,53 +112,179 @@ const EMPTY_CRITERION = {
   }
 };
 
-const descriptorTextByLevel = (workLooksLike) => ({
-  Emerging:
-    `Work shows early attempts at ${workLooksLike}; support is needed to meet task expectations.`,
-  Developing:
-    `Work demonstrates partial control of ${workLooksLike}; consistency and depth are still developing.`,
-  Exhibiting:
-    `Work consistently demonstrates ${workLooksLike} at the expected course standard.`,
-  'Exhibiting Depth':
-    `Work demonstrates sophisticated, transferable ${workLooksLike} with originality and precision.`
-});
+const getOutcomeByIndex = (allOutcomes, index) => allOutcomes[index] || '';
 
-const findBestOutcomeMatch = (allOutcomes, keywords, usedOutcomes) => {
-  const normalizedKeywords = keywords.map((k) => k.toLowerCase());
+const getReportingCategoryForOutcome = (course, learningOutcome) => {
+  if (!course || !learningOutcome) return '';
 
-  const directMatch = allOutcomes.find(
-    (outcome) =>
-      !usedOutcomes.has(outcome) &&
-      normalizedKeywords.some((keyword) => outcome.toLowerCase().includes(keyword))
-  );
+  const categories = Object.entries(course.outcomes);
+  for (let i = 0; i < categories.length; i += 1) {
+    const [category, outcomes] = categories[i];
+    if (outcomes.includes(learningOutcome)) return category;
+  }
 
-  if (directMatch) return directMatch;
-
-  return allOutcomes.find((outcome) => !usedOutcomes.has(outcome)) || '';
+  return '';
 };
 
+const createCriterion = (
+  id,
+  name,
+  learningOutcome,
+  criterionString,
+  reportingCategory = ''
+) => ({
+  id,
+  name,
+  reportingCategory,
+  learningOutcome,
+  descriptors: {
+    Emerging: `Beginning level: ${criterionString}`,
+    Developing: `Developing level: ${criterionString}`,
+    Exhibiting: `Proficient level: ${criterionString}`,
+    'Exhibiting Depth': `Advanced level: ${criterionString}`
+  }
+});
+
 const buildCriteriaFromAssessment = (type, course) => {
-  const templates =
-    ASSESSMENT_CRITERIA_TEMPLATES[type] || DEFAULT_ASSESSMENT_CRITERIA;
   const allOutcomes = course ? Object.values(course.outcomes).flat() : [];
-  const usedOutcomes = new Set();
+  const startId = Date.now();
 
-  return templates.map((template, index) => {
-    const matchedOutcome = findBestOutcomeMatch(
-      allOutcomes,
-      template.keywords,
-      usedOutcomes
-    );
+  if (type === 'Analytical Essay') {
+    return [
+      createCriterion(startId, 'Thesis & Insight', getOutcomeByIndex(allOutcomes, 0), 'A clear, arguable thesis presents a thoughtful interpretation.'),
+      createCriterion(startId + 1, 'Evidence & Analysis', getOutcomeByIndex(allOutcomes, 1), 'Textual evidence is specific, relevant, and explained with strong analysis.'),
+      createCriterion(startId + 2, 'Organization & Style', getOutcomeByIndex(allOutcomes, 2), 'Ideas are logically organized with coherent paragraphs and academic voice.'),
+      createCriterion(startId + 3, 'Conventions & Citation', getOutcomeByIndex(allOutcomes, 3), 'Grammar, usage, and citation format are accurate and consistent.')
+    ];
+  }
 
-    if (matchedOutcome) usedOutcomes.add(matchedOutcome);
+  if (type === 'Timed In-Class Writing') {
+    return [
+      createCriterion(startId, 'Response to Prompt', getOutcomeByIndex(allOutcomes, 0), 'The response directly addresses the prompt with a focused position.'),
+      createCriterion(startId + 1, 'Evidence Under Time', getOutcomeByIndex(allOutcomes, 1), 'Relevant evidence is selected quickly and used to support ideas clearly.'),
+      createCriterion(startId + 2, 'Coherence & Control', getOutcomeByIndex(allOutcomes, 2), 'Writing remains coherent and purposeful despite time constraints.'),
+      createCriterion(startId + 3, 'Language Conventions', getOutcomeByIndex(allOutcomes, 3), 'Sentence control and conventions support readability and meaning.')
+    ];
+  }
 
-    return {
-      id: Date.now() + index,
-      name: template.name,
-      learningOutcome: matchedOutcome,
-      descriptors: descriptorTextByLevel(template.workLooksLike)
-    };
-  });
+  if (type === 'Research Project') {
+    return [
+      createCriterion(startId, 'Inquiry Question', getOutcomeByIndex(allOutcomes, 0), 'The project is guided by a focused and meaningful inquiry question.'),
+      createCriterion(startId + 1, 'Source Integration', getOutcomeByIndex(allOutcomes, 1), 'Credible sources are synthesized and integrated with clear attribution.'),
+      createCriterion(startId + 2, 'Analysis & Conclusions', getOutcomeByIndex(allOutcomes, 2), 'Conclusions are evidence-based and show analytical depth.'),
+      createCriterion(startId + 3, 'Communication of Findings', getOutcomeByIndex(allOutcomes, 3), 'Findings are communicated clearly for the intended audience and purpose.')
+    ];
+  }
+
+  if (type === 'Oral Presentation') {
+    return [
+      createCriterion(startId, 'Content Knowledge', getOutcomeByIndex(allOutcomes, 0), 'Key ideas are accurate, relevant, and developed with appropriate depth.'),
+      createCriterion(startId + 1, 'Use of Evidence', getOutcomeByIndex(allOutcomes, 1), 'Claims are supported with specific and well-explained evidence.'),
+      createCriterion(startId + 2, 'Organization & Clarity', getOutcomeByIndex(allOutcomes, 2), 'Presentation has a clear structure, pacing, and transitions.'),
+      createCriterion(startId + 3, 'Delivery & Engagement', getOutcomeByIndex(allOutcomes, 3), 'Delivery is confident and actively engages the audience.')
+    ];
+  }
+
+  if (type === 'Socratic Seminar') {
+    return [
+      createCriterion(startId, 'Preparation', getOutcomeByIndex(allOutcomes, 0), 'Comments show preparation with relevant text references and notes.'),
+      createCriterion(startId + 1, 'Speaking & Listening', getOutcomeByIndex(allOutcomes, 1), 'Student listens actively and builds on peers ideas respectfully.'),
+      createCriterion(startId + 2, 'Reasoning & Evidence', getOutcomeByIndex(allOutcomes, 2), 'Contributions include clear reasoning and support from evidence.'),
+      createCriterion(startId + 3, 'Depth of Inquiry', getOutcomeByIndex(allOutcomes, 3), 'Questions and responses deepen group understanding of the topic.')
+    ];
+  }
+
+  if (type === 'Structured Debate') {
+    return [
+      createCriterion(startId, 'Claim & Position', getOutcomeByIndex(allOutcomes, 0), 'Position is clear, focused, and logically framed.'),
+      createCriterion(startId + 1, 'Evidence & Rebuttal', getOutcomeByIndex(allOutcomes, 1), 'Arguments use evidence and rebut opposing points effectively.'),
+      createCriterion(startId + 2, 'Organization of Argument', getOutcomeByIndex(allOutcomes, 2), 'Points are sequenced strategically and support a coherent case.'),
+      createCriterion(startId + 3, 'Delivery & Teamwork', getOutcomeByIndex(allOutcomes, 3), 'Delivery is persuasive and collaboration strengthens the debate.')
+    ];
+  }
+
+  if (type === 'Multimedia Composition') {
+    return [
+      createCriterion(startId, 'Message & Purpose', getOutcomeByIndex(allOutcomes, 0), 'The composition communicates a clear and meaningful central message.'),
+      createCriterion(startId + 1, 'Use of Media Elements', getOutcomeByIndex(allOutcomes, 1), 'Visual, audio, and text elements are purposeful and cohesive.'),
+      createCriterion(startId + 2, 'Evidence & Accuracy', getOutcomeByIndex(allOutcomes, 2), 'Content is accurate and supported with relevant evidence.'),
+      createCriterion(startId + 3, 'Technical & Design Quality', getOutcomeByIndex(allOutcomes, 3), 'Production quality and design choices strengthen communication.')
+    ];
+  }
+
+  if (type === 'Journal Response') {
+    return [
+      createCriterion(startId, 'Reflection & Insight', getOutcomeByIndex(allOutcomes, 0), 'Reflection demonstrates personal insight and thoughtful connection.'),
+      createCriterion(startId + 1, 'Connection to Learning', getOutcomeByIndex(allOutcomes, 1), 'Response links clearly to class ideas, texts, or discussions.'),
+      createCriterion(startId + 2, 'Reasoning & Support', getOutcomeByIndex(allOutcomes, 2), 'Ideas are explained with reasons, examples, or textual support.'),
+      createCriterion(startId + 3, 'Writing Clarity', getOutcomeByIndex(allOutcomes, 3), 'Writing is clear, focused, and mostly free of distracting errors.')
+    ];
+  }
+
+  if (type === 'Group Project') {
+    return [
+      createCriterion(startId, 'Contribution to Team', getOutcomeByIndex(allOutcomes, 0), 'Student contributes reliably and completes assigned responsibilities.'),
+      createCriterion(startId + 1, 'Collaboration Skills', getOutcomeByIndex(allOutcomes, 1), 'Team interactions are respectful, productive, and solution-oriented.'),
+      createCriterion(startId + 2, 'Project Quality', getOutcomeByIndex(allOutcomes, 2), 'Final product demonstrates quality, depth, and attention to purpose.'),
+      createCriterion(startId + 3, 'Process & Reflection', getOutcomeByIndex(allOutcomes, 3), 'Student reflects on process and identifies next steps for growth.')
+    ];
+  }
+
+  if (type === 'Position Paper') {
+    return [
+      createCriterion(startId, 'Position & Focus', getOutcomeByIndex(allOutcomes, 0), 'A clear position is established and maintained throughout the paper.'),
+      createCriterion(startId + 1, 'Evidence & Counterargument', getOutcomeByIndex(allOutcomes, 1), 'Evidence is strong and counterarguments are addressed thoughtfully.'),
+      createCriterion(startId + 2, 'Reasoning & Persuasion', getOutcomeByIndex(allOutcomes, 2), 'Reasoning is logical and persuades the reader effectively.'),
+      createCriterion(startId + 3, 'Writing Conventions', getOutcomeByIndex(allOutcomes, 3), 'Language, tone, and formatting suit formal academic writing.')
+    ];
+  }
+
+  if (type === 'Creative Writing') {
+    return [
+      createCriterion(startId, 'Originality & Voice', getOutcomeByIndex(allOutcomes, 0), 'Writing shows originality, voice, and imaginative development.'),
+      createCriterion(startId + 1, 'Craft & Technique', getOutcomeByIndex(allOutcomes, 1), 'Literary techniques are used deliberately to create effect.'),
+      createCriterion(startId + 2, 'Structure & Flow', getOutcomeByIndex(allOutcomes, 2), 'Structure supports meaning and keeps the reader engaged.'),
+      createCriterion(startId + 3, 'Language Control', getOutcomeByIndex(allOutcomes, 3), 'Word choice and sentence control strengthen clarity and impact.')
+    ];
+  }
+
+  if (type === 'Literary Analysis') {
+    return [
+      createCriterion(startId, 'Interpretation of Text', getOutcomeByIndex(allOutcomes, 0), 'Interpretation is thoughtful, accurate, and grounded in the text.'),
+      createCriterion(startId + 1, 'Use of Quotations', getOutcomeByIndex(allOutcomes, 1), 'Quotations are relevant and integrated smoothly into analysis.'),
+      createCriterion(startId + 2, 'Analytical Reasoning', getOutcomeByIndex(allOutcomes, 2), 'Analysis explains how and why textual choices create meaning.'),
+      createCriterion(startId + 3, 'Organization & Conventions', getOutcomeByIndex(allOutcomes, 3), 'Essay organization and conventions support clear communication.')
+    ];
+  }
+
+  if (type === 'Rhetorical Analysis') {
+    return [
+      createCriterion(startId, 'Rhetorical Situation', getOutcomeByIndex(allOutcomes, 0), 'Analysis identifies purpose, audience, and context accurately.'),
+      createCriterion(startId + 1, 'Device Analysis', getOutcomeByIndex(allOutcomes, 1), 'Rhetorical choices are analyzed with clear explanation of effect.'),
+      createCriterion(startId + 2, 'Evidence & Explanation', getOutcomeByIndex(allOutcomes, 2), 'Evidence is well chosen and explained with precise reasoning.'),
+      createCriterion(startId + 3, 'Clarity & Academic Style', getOutcomeByIndex(allOutcomes, 3), 'Writing is clear, formal, and appropriately structured.')
+    ];
+  }
+
+  if (type === 'Argument Essay') {
+    return [
+      createCriterion(startId, 'Claim & Thesis', getOutcomeByIndex(allOutcomes, 0), 'A strong claim is established and refined across the essay.'),
+      createCriterion(startId + 1, 'Support & Evidence', getOutcomeByIndex(allOutcomes, 1), 'Evidence is relevant, credible, and connected to the claim.'),
+      createCriterion(startId + 2, 'Counterclaim & Rebuttal', getOutcomeByIndex(allOutcomes, 2), 'Counterclaims are acknowledged and rebutted with logic.'),
+      createCriterion(startId + 3, 'Organization & Conventions', getOutcomeByIndex(allOutcomes, 3), 'Argument structure and conventions strengthen persuasiveness.')
+    ];
+  }
+
+  if (type === 'Synthesis Essay') {
+    return [
+      createCriterion(startId, 'Synthesis Thesis', getOutcomeByIndex(allOutcomes, 0), 'Thesis integrates ideas from multiple sources into one argument.'),
+      createCriterion(startId + 1, 'Source Integration', getOutcomeByIndex(allOutcomes, 1), 'Sources are combined meaningfully rather than summarized separately.'),
+      createCriterion(startId + 2, 'Comparative Analysis', getOutcomeByIndex(allOutcomes, 2), 'Analysis compares perspectives and explains relationships clearly.'),
+      createCriterion(startId + 3, 'Academic Writing Quality', getOutcomeByIndex(allOutcomes, 3), 'Writing is cohesive, precise, and follows academic conventions.')
+    ];
+  }
+
+  return [EMPTY_CRITERION];
 };
 
 function App() {
@@ -278,6 +303,7 @@ function App() {
       {
         id: Date.now(),
         name: '',
+        reportingCategory: '',
         learningOutcome: '',
         descriptors: {
           Emerging: '',
@@ -315,7 +341,17 @@ function App() {
       return;
     }
 
-    setCriteria(buildCriteriaFromAssessment(value, currentCourse));
+    const generatedCriteria = buildCriteriaFromAssessment(value, currentCourse);
+
+    setCriteria(
+      generatedCriteria.map((criterion) => ({
+        ...criterion,
+        reportingCategory: getReportingCategoryForOutcome(
+          currentCourse,
+          criterion.learningOutcome
+        )
+      }))
+    );
   };
 
   return (
@@ -410,30 +446,6 @@ function App() {
             </div>
           </div>
 
-          {/* Scale Reference */}
-          <div className="card">
-            <h2 className="card-title">HKIS General Academic Scale</h2>
-            <div className="scale-grid">
-              {HKIS_LEVELS.map((level) => (
-                <div
-                  key={level.name}
-                  className="scale-box"
-                  style={{
-                    backgroundColor: level.color,
-                    borderLeft: `4px solid ${level.borderColor}`
-                  }}
-                >
-                  <div
-                    className="scale-name"
-                    style={{ color: level.borderColor }}
-                  >
-                    {level.name}
-                  </div>
-                  <div className="scale-desc">{level.description}</div>
-                </div>
-              ))}
-            </div>
-          </div>
 
           {/* Criteria */}
           <div className="criteria-header">
@@ -459,7 +471,7 @@ function App() {
                 )}
               </div>
 
-              <div className="grid-2" style={{ marginBottom: '16px' }}>
+              <div className="grid-3" style={{ marginBottom: '16px' }}>
                 <div className="field">
                   <label>Criterion Name</label>
                   <input
@@ -471,16 +483,55 @@ function App() {
                   />
                 </div>
                 <div className="field">
-                  <label>Linked Learning Outcome</label>
+                  <label>Reporting Category</label>
                   <select
-                    value={criterion.learningOutcome}
+                    value={criterion.reportingCategory || ''}
                     onChange={(e) =>
                       updateCriterion(
                         criterion.id,
-                        'learningOutcome',
+                        'reportingCategory',
                         e.target.value
                       )
                     }
+                  >
+                    <option value="">
+                      {selectedCourse
+                        ? 'Select a reporting category…'
+                        : '← Select a course first'}
+                    </option>
+                    {currentCourse &&
+                      Object.keys(currentCourse.outcomes).map((category) => (
+                        <option key={category} value={category}>
+                          {category}
+                        </option>
+                      ))}
+                    <option value="Interdisciplinary">Interdisciplinary</option>
+                    <option value="Process & Skills">Process & Skills</option>
+                  </select>
+                </div>
+                <div className="field">
+                  <label>Linked Learning Outcome</label>
+                  <select
+                    value={criterion.learningOutcome}
+                    onChange={(e) => {
+                      const selectedOutcome = e.target.value;
+                      updateCriterion(
+                        criterion.id,
+                        'learningOutcome',
+                        selectedOutcome
+                      );
+
+                      if (!criterion.reportingCategory) {
+                        updateCriterion(
+                          criterion.id,
+                          'reportingCategory',
+                          getReportingCategoryForOutcome(
+                            currentCourse,
+                            selectedOutcome
+                          )
+                        );
+                      }
+                    }}
                   >
                     <option value="">
                       {selectedCourse
@@ -599,6 +650,11 @@ function App() {
                       <div className="criterion-name">
                         {criterion.name || `Criterion ${index + 1}`}
                       </div>
+                      {criterion.reportingCategory && (
+                        <div className="criterion-reporting">
+                          Reporting Category: {criterion.reportingCategory}
+                        </div>
+                      )}
                       {criterion.learningOutcome && (
                         <div className="criterion-outcome">
                           {criterion.learningOutcome}

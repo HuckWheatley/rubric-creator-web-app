@@ -157,6 +157,13 @@ textarea { resize: vertical; }
 .td-criterion { padding: 14px; border-bottom: 1px solid #e8e0d8; vertical-align: top; width: 18%; }
 .td-descriptor { padding: 14px; border-bottom: 1px solid #e8e0d8; vertical-align: top; line-height: 1.5; }
 .criterion-name { font-weight: bold; margin-bottom: 4px; }
+.criterion-reporting {
+  font-size: 11px;
+  color: #8b1a1a;
+  font-weight: bold;
+  line-height: 1.4;
+  margin-bottom: 3px;
+}
 .criterion-outcome { font-size: 11px; color: #888; font-style: italic; line-height: 1.4; }
 .empty-descriptor { color: #bbb; font-style: italic; }
 
