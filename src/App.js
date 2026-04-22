@@ -160,127 +160,127 @@ const buildCriteriaFromAssessment = (type, course) => {
 
   if (type === 'Timed In-Class Writing') {
     return [
-      createCriterion(startId, 'Response to Prompt', getOutcomeByIndex(allOutcomes, 0), 'The response directly addresses the prompt with a focused position.'),
-      createCriterion(startId + 1, 'Evidence Under Time', getOutcomeByIndex(allOutcomes, 1), 'Relevant evidence is selected quickly and used to support ideas clearly.'),
-      createCriterion(startId + 2, 'Coherence & Control', getOutcomeByIndex(allOutcomes, 2), 'Writing remains coherent and purposeful despite time constraints.'),
-      createCriterion(startId + 3, 'Language Conventions', getOutcomeByIndex(allOutcomes, 3), 'Sentence control and conventions support readability and meaning.')
+      createCriterion(startId, 'Response to Prompt', getOutcomeByIndex(allOutcomes, 0), 'Placeholder text'),
+      createCriterion(startId + 1, 'Evidence Under Time', getOutcomeByIndex(allOutcomes, 1), 'Placeholder text'),
+      createCriterion(startId + 2, 'Coherence & Control', getOutcomeByIndex(allOutcomes, 2), 'Placeholder text'),
+      createCriterion(startId + 3, 'Language Conventions', getOutcomeByIndex(allOutcomes, 3), 'Placeholder text')
     ];
   }
 
   if (type === 'Research Project') {
     return [
-      createCriterion(startId, 'Inquiry Question', getOutcomeByIndex(allOutcomes, 0), 'The project is guided by a focused and meaningful inquiry question.'),
-      createCriterion(startId + 1, 'Source Integration', getOutcomeByIndex(allOutcomes, 1), 'Credible sources are synthesized and integrated with clear attribution.'),
-      createCriterion(startId + 2, 'Analysis & Conclusions', getOutcomeByIndex(allOutcomes, 2), 'Conclusions are evidence-based and show analytical depth.'),
-      createCriterion(startId + 3, 'Communication of Findings', getOutcomeByIndex(allOutcomes, 3), 'Findings are communicated clearly for the intended audience and purpose.')
+      createCriterion(startId, 'Inquiry Question', getOutcomeByIndex(allOutcomes, 0), 'Placeholder text'),
+      createCriterion(startId + 1, 'Source Integration', getOutcomeByIndex(allOutcomes, 1), 'Placeholder text'),
+      createCriterion(startId + 2, 'Analysis & Conclusions', getOutcomeByIndex(allOutcomes, 2), 'Placeholder text'),
+      createCriterion(startId + 3, 'Communication of Findings', getOutcomeByIndex(allOutcomes, 3), 'Placeholder text')
     ];
   }
 
   if (type === 'Oral Presentation') {
     return [
-      createCriterion(startId, 'Content Knowledge', getOutcomeByIndex(allOutcomes, 0), 'Key ideas are accurate, relevant, and developed with appropriate depth.'),
-      createCriterion(startId + 1, 'Use of Evidence', getOutcomeByIndex(allOutcomes, 1), 'Claims are supported with specific and well-explained evidence.'),
-      createCriterion(startId + 2, 'Organization & Clarity', getOutcomeByIndex(allOutcomes, 2), 'Presentation has a clear structure, pacing, and transitions.'),
-      createCriterion(startId + 3, 'Delivery & Engagement', getOutcomeByIndex(allOutcomes, 3), 'Delivery is confident and actively engages the audience.')
+      createCriterion(startId, 'Content Knowledge', getOutcomeByIndex(allOutcomes, 0), 'Placeholder text'),
+      createCriterion(startId + 1, 'Use of Evidence', getOutcomeByIndex(allOutcomes, 1), 'Placeholder text'),
+      createCriterion(startId + 2, 'Organization & Clarity', getOutcomeByIndex(allOutcomes, 2), 'Placeholder text'),
+      createCriterion(startId + 3, 'Delivery & Engagement', getOutcomeByIndex(allOutcomes, 3), 'Placeholder text')
     ];
   }
 
   if (type === 'Socratic Seminar') {
     return [
-      createCriterion(startId, 'Preparation', getOutcomeByIndex(allOutcomes, 0), 'Comments show preparation with relevant text references and notes.'),
-      createCriterion(startId + 1, 'Speaking & Listening', getOutcomeByIndex(allOutcomes, 1), 'Student listens actively and builds on peers ideas respectfully.'),
-      createCriterion(startId + 2, 'Reasoning & Evidence', getOutcomeByIndex(allOutcomes, 2), 'Contributions include clear reasoning and support from evidence.'),
-      createCriterion(startId + 3, 'Depth of Inquiry', getOutcomeByIndex(allOutcomes, 3), 'Questions and responses deepen group understanding of the topic.')
+      createCriterion(startId, 'Preparation', getOutcomeByIndex(allOutcomes, 0), 'Placeholder text'),
+      createCriterion(startId + 1, 'Speaking & Listening', getOutcomeByIndex(allOutcomes, 1), 'Placeholder text'),
+      createCriterion(startId + 2, 'Reasoning & Evidence', getOutcomeByIndex(allOutcomes, 2), 'Placeholder text'),
+      createCriterion(startId + 3, 'Depth of Inquiry', getOutcomeByIndex(allOutcomes, 3), 'Placeholder text')
     ];
   }
 
   if (type === 'Structured Debate') {
     return [
-      createCriterion(startId, 'Claim & Position', getOutcomeByIndex(allOutcomes, 0), 'Position is clear, focused, and logically framed.'),
-      createCriterion(startId + 1, 'Evidence & Rebuttal', getOutcomeByIndex(allOutcomes, 1), 'Arguments use evidence and rebut opposing points effectively.'),
-      createCriterion(startId + 2, 'Organization of Argument', getOutcomeByIndex(allOutcomes, 2), 'Points are sequenced strategically and support a coherent case.'),
-      createCriterion(startId + 3, 'Delivery & Teamwork', getOutcomeByIndex(allOutcomes, 3), 'Delivery is persuasive and collaboration strengthens the debate.')
+      createCriterion(startId, 'Claim & Position', getOutcomeByIndex(allOutcomes, 0), 'Placeholder text'),
+      createCriterion(startId + 1, 'Evidence & Rebuttal', getOutcomeByIndex(allOutcomes, 1), 'Placeholder text'),
+      createCriterion(startId + 2, 'Organization of Argument', getOutcomeByIndex(allOutcomes, 2), 'Placeholder text'),
+      createCriterion(startId + 3, 'Delivery & Teamwork', getOutcomeByIndex(allOutcomes, 3), 'Placeholder text')
     ];
   }
 
   if (type === 'Multimedia Composition') {
     return [
-      createCriterion(startId, 'Message & Purpose', getOutcomeByIndex(allOutcomes, 0), 'The composition communicates a clear and meaningful central message.'),
-      createCriterion(startId + 1, 'Use of Media Elements', getOutcomeByIndex(allOutcomes, 1), 'Visual, audio, and text elements are purposeful and cohesive.'),
-      createCriterion(startId + 2, 'Evidence & Accuracy', getOutcomeByIndex(allOutcomes, 2), 'Content is accurate and supported with relevant evidence.'),
-      createCriterion(startId + 3, 'Technical & Design Quality', getOutcomeByIndex(allOutcomes, 3), 'Production quality and design choices strengthen communication.')
+      createCriterion(startId, 'Message & Purpose', getOutcomeByIndex(allOutcomes, 0), 'Placeholder text'),
+      createCriterion(startId + 1, 'Use of Media Elements', getOutcomeByIndex(allOutcomes, 1), 'Placeholder text'),
+      createCriterion(startId + 2, 'Evidence & Accuracy', getOutcomeByIndex(allOutcomes, 2), 'Placeholder text'),
+      createCriterion(startId + 3, 'Technical & Design Quality', getOutcomeByIndex(allOutcomes, 3), 'Placeholder text')
     ];
   }
 
   if (type === 'Journal Response') {
     return [
-      createCriterion(startId, 'Reflection & Insight', getOutcomeByIndex(allOutcomes, 0), 'Reflection demonstrates personal insight and thoughtful connection.'),
-      createCriterion(startId + 1, 'Connection to Learning', getOutcomeByIndex(allOutcomes, 1), 'Response links clearly to class ideas, texts, or discussions.'),
-      createCriterion(startId + 2, 'Reasoning & Support', getOutcomeByIndex(allOutcomes, 2), 'Ideas are explained with reasons, examples, or textual support.'),
-      createCriterion(startId + 3, 'Writing Clarity', getOutcomeByIndex(allOutcomes, 3), 'Writing is clear, focused, and mostly free of distracting errors.')
+      createCriterion(startId, 'Reflection & Insight', getOutcomeByIndex(allOutcomes, 0), 'Placeholder text'),
+      createCriterion(startId + 1, 'Connection to Learning', getOutcomeByIndex(allOutcomes, 1), 'Placeholder text'),
+      createCriterion(startId + 2, 'Reasoning & Support', getOutcomeByIndex(allOutcomes, 2), 'Placeholder text'),
+      createCriterion(startId + 3, 'Writing Clarity', getOutcomeByIndex(allOutcomes, 3), 'Placeholder text')
     ];
   }
 
   if (type === 'Group Project') {
     return [
-      createCriterion(startId, 'Contribution to Team', getOutcomeByIndex(allOutcomes, 0), 'Student contributes reliably and completes assigned responsibilities.'),
-      createCriterion(startId + 1, 'Collaboration Skills', getOutcomeByIndex(allOutcomes, 1), 'Team interactions are respectful, productive, and solution-oriented.'),
-      createCriterion(startId + 2, 'Project Quality', getOutcomeByIndex(allOutcomes, 2), 'Final product demonstrates quality, depth, and attention to purpose.'),
-      createCriterion(startId + 3, 'Process & Reflection', getOutcomeByIndex(allOutcomes, 3), 'Student reflects on process and identifies next steps for growth.')
+      createCriterion(startId, 'Contribution to Team', getOutcomeByIndex(allOutcomes, 0), 'Placeholder text'),
+      createCriterion(startId + 1, 'Collaboration Skills', getOutcomeByIndex(allOutcomes, 1), 'Placeholder text'),
+      createCriterion(startId + 2, 'Project Quality', getOutcomeByIndex(allOutcomes, 2), 'Placeholder text'),
+      createCriterion(startId + 3, 'Process & Reflection', getOutcomeByIndex(allOutcomes, 3), 'Placeholder text')
     ];
   }
 
   if (type === 'Position Paper') {
     return [
-      createCriterion(startId, 'Position & Focus', getOutcomeByIndex(allOutcomes, 0), 'A clear position is established and maintained throughout the paper.'),
-      createCriterion(startId + 1, 'Evidence & Counterargument', getOutcomeByIndex(allOutcomes, 1), 'Evidence is strong and counterarguments are addressed thoughtfully.'),
-      createCriterion(startId + 2, 'Reasoning & Persuasion', getOutcomeByIndex(allOutcomes, 2), 'Reasoning is logical and persuades the reader effectively.'),
-      createCriterion(startId + 3, 'Writing Conventions', getOutcomeByIndex(allOutcomes, 3), 'Language, tone, and formatting suit formal academic writing.')
+      createCriterion(startId, 'Position & Focus', getOutcomeByIndex(allOutcomes, 0), 'Placeholder text'),
+      createCriterion(startId + 1, 'Evidence & Counterargument', getOutcomeByIndex(allOutcomes, 1), 'Placeholder text'),
+      createCriterion(startId + 2, 'Reasoning & Persuasion', getOutcomeByIndex(allOutcomes, 2), 'Placeholder text'),
+      createCriterion(startId + 3, 'Writing Conventions', getOutcomeByIndex(allOutcomes, 3), 'Placeholder text')
     ];
   }
 
   if (type === 'Creative Writing') {
     return [
-      createCriterion(startId, 'Originality & Voice', getOutcomeByIndex(allOutcomes, 0), 'Writing shows originality, voice, and imaginative development.'),
-      createCriterion(startId + 1, 'Craft & Technique', getOutcomeByIndex(allOutcomes, 1), 'Literary techniques are used deliberately to create effect.'),
-      createCriterion(startId + 2, 'Structure & Flow', getOutcomeByIndex(allOutcomes, 2), 'Structure supports meaning and keeps the reader engaged.'),
-      createCriterion(startId + 3, 'Language Control', getOutcomeByIndex(allOutcomes, 3), 'Word choice and sentence control strengthen clarity and impact.')
+      createCriterion(startId, 'Originality & Voice', getOutcomeByIndex(allOutcomes, 0), 'Placeholder text'),
+      createCriterion(startId + 1, 'Craft & Technique', getOutcomeByIndex(allOutcomes, 1), 'Placeholder text'),
+      createCriterion(startId + 2, 'Structure & Flow', getOutcomeByIndex(allOutcomes, 2), 'Placeholder text'),
+      createCriterion(startId + 3, 'Language Control', getOutcomeByIndex(allOutcomes, 3), 'Placeholder text')
     ];
   }
 
   if (type === 'Literary Analysis') {
     return [
-      createCriterion(startId, 'Interpretation of Text', getOutcomeByIndex(allOutcomes, 0), 'Interpretation is thoughtful, accurate, and grounded in the text.'),
-      createCriterion(startId + 1, 'Use of Quotations', getOutcomeByIndex(allOutcomes, 1), 'Quotations are relevant and integrated smoothly into analysis.'),
-      createCriterion(startId + 2, 'Analytical Reasoning', getOutcomeByIndex(allOutcomes, 2), 'Analysis explains how and why textual choices create meaning.'),
-      createCriterion(startId + 3, 'Organization & Conventions', getOutcomeByIndex(allOutcomes, 3), 'Essay organization and conventions support clear communication.')
+      createCriterion(startId, 'Interpretation of Text', getOutcomeByIndex(allOutcomes, 0), 'Placeholder text'),
+      createCriterion(startId + 1, 'Use of Quotations', getOutcomeByIndex(allOutcomes, 1), 'Placeholder text'),
+      createCriterion(startId + 2, 'Analytical Reasoning', getOutcomeByIndex(allOutcomes, 2), 'Placeholder text'),
+      createCriterion(startId + 3, 'Organization & Conventions', getOutcomeByIndex(allOutcomes, 3), 'Placeholder text')
     ];
   }
 
   if (type === 'Rhetorical Analysis') {
     return [
-      createCriterion(startId, 'Rhetorical Situation', getOutcomeByIndex(allOutcomes, 0), 'Analysis identifies purpose, audience, and context accurately.'),
-      createCriterion(startId + 1, 'Device Analysis', getOutcomeByIndex(allOutcomes, 1), 'Rhetorical choices are analyzed with clear explanation of effect.'),
-      createCriterion(startId + 2, 'Evidence & Explanation', getOutcomeByIndex(allOutcomes, 2), 'Evidence is well chosen and explained with precise reasoning.'),
-      createCriterion(startId + 3, 'Clarity & Academic Style', getOutcomeByIndex(allOutcomes, 3), 'Writing is clear, formal, and appropriately structured.')
+      createCriterion(startId, 'Rhetorical Situation', getOutcomeByIndex(allOutcomes, 0), 'Placeholder text'),
+      createCriterion(startId + 1, 'Device Analysis', getOutcomeByIndex(allOutcomes, 1), 'Placeholder text'),
+      createCriterion(startId + 2, 'Evidence & Explanation', getOutcomeByIndex(allOutcomes, 2), 'Placeholder text'),
+      createCriterion(startId + 3, 'Clarity & Academic Style', getOutcomeByIndex(allOutcomes, 3), 'Placeholder text')
     ];
   }
 
   if (type === 'Argument Essay') {
     return [
-      createCriterion(startId, 'Claim & Thesis', getOutcomeByIndex(allOutcomes, 0), 'A strong claim is established and refined across the essay.'),
-      createCriterion(startId + 1, 'Support & Evidence', getOutcomeByIndex(allOutcomes, 1), 'Evidence is relevant, credible, and connected to the claim.'),
-      createCriterion(startId + 2, 'Counterclaim & Rebuttal', getOutcomeByIndex(allOutcomes, 2), 'Counterclaims are acknowledged and rebutted with logic.'),
-      createCriterion(startId + 3, 'Organization & Conventions', getOutcomeByIndex(allOutcomes, 3), 'Argument structure and conventions strengthen persuasiveness.')
+      createCriterion(startId, 'Claim & Thesis', getOutcomeByIndex(allOutcomes, 0), 'Placeholder text'),
+      createCriterion(startId + 1, 'Support & Evidence', getOutcomeByIndex(allOutcomes, 1), 'Placeholder text'),
+      createCriterion(startId + 2, 'Counterclaim & Rebuttal', getOutcomeByIndex(allOutcomes, 2), 'Placeholder text'),
+      createCriterion(startId + 3, 'Organization & Conventions', getOutcomeByIndex(allOutcomes, 3), 'Placeholder text')
     ];
   }
 
   if (type === 'Synthesis Essay') {
     return [
-      createCriterion(startId, 'Synthesis Thesis', getOutcomeByIndex(allOutcomes, 0), 'Thesis integrates ideas from multiple sources into one argument.'),
-      createCriterion(startId + 1, 'Source Integration', getOutcomeByIndex(allOutcomes, 1), 'Sources are combined meaningfully rather than summarized separately.'),
-      createCriterion(startId + 2, 'Comparative Analysis', getOutcomeByIndex(allOutcomes, 2), 'Analysis compares perspectives and explains relationships clearly.'),
-      createCriterion(startId + 3, 'Academic Writing Quality', getOutcomeByIndex(allOutcomes, 3), 'Writing is cohesive, precise, and follows academic conventions.')
+      createCriterion(startId, 'Synthesis Thesis', getOutcomeByIndex(allOutcomes, 0), 'Placeholder text'),
+      createCriterion(startId + 1, 'Source Integration', getOutcomeByIndex(allOutcomes, 1), 'Placeholder text'),
+      createCriterion(startId + 2, 'Comparative Analysis', getOutcomeByIndex(allOutcomes, 2), 'Placeholder text'),
+      createCriterion(startId + 3, 'Academic Writing Quality', getOutcomeByIndex(allOutcomes, 3), 'Placeholder text')
     ];
   }
 
