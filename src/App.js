@@ -151,10 +151,10 @@ const buildCriteriaFromAssessment = (type, course) => {
 
   if (type === 'Analytical Essay') {
     return [
-      createCriterion(startId, 'Thesis & Insight', getOutcomeByIndex(allOutcomes, 0), 'A clear, arguable thesis presents a thoughtful interpretation.'),
-      createCriterion(startId + 1, 'Evidence & Analysis', getOutcomeByIndex(allOutcomes, 1), 'Textual evidence is specific, relevant, and explained with strong analysis.'),
-      createCriterion(startId + 2, 'Organization & Style', getOutcomeByIndex(allOutcomes, 2), 'Ideas are logically organized with coherent paragraphs and academic voice.'),
-      createCriterion(startId + 3, 'Conventions & Citation', getOutcomeByIndex(allOutcomes, 3), 'Grammar, usage, and citation format are accurate and consistent.')
+      createCriterion(startId, 'Placeholder text', getOutcomeByIndex(allOutcomes, 0), 'Placeholder text'),
+      createCriterion(startId + 1, 'Placeholder text', getOutcomeByIndex(allOutcomes, 1), 'Placeholder text'),
+      createCriterion(startId + 2, 'Placeholder text', getOutcomeByIndex(allOutcomes, 2), 'Placeholder text'),
+      createCriterion(startId + 3, 'Placeholder text', getOutcomeByIndex(allOutcomes, 3), 'Placeholder text')
     ];
   }
 
@@ -440,7 +440,7 @@ function App() {
                 <input
                   value={teacherName}
                   onChange={(e) => setTeacherName(e.target.value)}
-                  placeholder="e.g., Ms. Chan"
+                  placeholder="e.g., Mr. Zen"
                 />
               </div>
             </div>
