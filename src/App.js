@@ -28,6 +28,153 @@ const HKIS_LEVELS = [
   }
 ];
 
+/* ══════════════════════════════════════════════════════════════
+   HKIS Schoolwide ELA + SS Reporting Taxonomy descriptors.
+   Keyed by Learning Outcome name. When a teacher picks a
+   learning outcome, we auto-fill all four descriptor boxes.
+   ══════════════════════════════════════════════════════════════ */
+const TAXONOMY_DESCRIPTORS = {
+  /* ── ELA: Comprehension and Analysis ── */
+  'Analyzing Ideas and Themes': {
+    Emerging:
+      "Begins to identify or describe the text's ideas, themes, and/or arguments in ways that are lacking in accuracy, specificity, and/or comprehension of the text's or author's purpose, intended audience, and/or broader context.",
+    Developing:
+      "Provides a limited explanation of the text's ideas, themes, and/or arguments that is in need of further elaboration, specificity, and/or more coherent connections to the text's purpose, author, audience, and/or broader context.",
+    Exhibiting:
+      "Exhibits an accurate understanding of the text's purpose, ideas, themes, and/or arguments with adequate clarity or specificity and/or with plausible connections to the text's author, audience, and/or broader context.",
+    'Exhibiting Depth':
+      "Consistently demonstrates a precise, nuanced, and/or comprehensive understanding of the text's purpose, ideas, themes, and/or arguments and their implications for the text's author, audience, and/or broader context."
+  },
+  'Analyzing Text Organization and Structure': {
+    Emerging:
+      "Begins to identify or describe aspects of the text's formal conventions, organization, and/or structure in ways that are lacking in accuracy, specificity, and/or convincing explanations as to how they contribute to the text's ideas, themes, and/or arguments.",
+    Developing:
+      "Provides a limited explanation of the text's formal conventions, organization, and/or structural features that is in need of further elaboration, specificity, and/or more plausible connections to the text's ideas, themes, and/or arguments.",
+    Exhibiting:
+      "Exhibits an accurate understanding of the formal conventions, organization, and/or structure of the text with adequate clarity and specificity in explaining how they contribute to the development of the text's ideas, themes, and/or arguments.",
+    'Exhibiting Depth':
+      "Consistently demonstrates a precise and persuasive understanding of how the text's formal conventions, organization, and/or structural features contribute to the development of significant ideas, themes, and/or arguments."
+  },
+  'Analyzing Language': {
+    Emerging:
+      'Begins to identify or describe stylistic features, rhetorical strategies, and/or literary techniques in ways that are lacking in accuracy, specificity, and/or convincing explanations as to how they contribute to the purpose and development of the text.',
+    Developing:
+      'Provides a limited explanation of stylistic features, rhetorical strategies, and/or literary techniques that is in need of further elaboration, specificity, and/or more plausible connections to the purpose and development of the text.',
+    Exhibiting:
+      'Exhibits an accurate understanding of stylistic features, rhetorical strategies, and/or literary techniques and explains with adequate clarity and specificity ways they contribute to the purpose and development of the text.',
+    'Exhibiting Depth':
+      'Consistently demonstrates a precise and persuasive understanding of significant stylistic features, rhetorical strategies, and/or literary techniques and how they contribute to the purpose and development of the text.'
+  },
+
+  /* ── ELA: Composition and Communication ── */
+  'Generating Text Organization and Structure': {
+    Emerging:
+      'Begins to adhere to or apply formal conventions and structural features in ways that lack consistency, resulting in a text or product in need of greater clarity and cohesion.',
+    Developing:
+      'Adherence to or application of formal conventions and structural features are evident in places and would benefit from more consistent or cohesive organizational choices.',
+    Exhibiting:
+      'Makes appropriate choices in adhering to or applying formal conventions and structural elements to create a text or product that is clear and adequately organized.',
+    'Exhibiting Depth':
+      'Makes consistently effective or inventive choices in adhering to or applying formal conventions and structural elements to create a cohesively organized and unified text or product.'
+  },
+  'Generating Claims, Evidence, and Reasoning': {
+    Emerging:
+      'Central claim (thesis) and supporting claims may not be defensible or may be lacking in relevance, with evidence and reasoning that is in need of greater specificity, detail, and/or accuracy.',
+    Developing:
+      'Central claim (thesis) and supporting claims are generally relevant and/or defensible with evidence and reasoning that would benefit from more consistency, specificity, detail, and/or accuracy.',
+    Exhibiting:
+      'Central claim (thesis) and supporting claims are relevant and defensible with substantive evidence and reasoning that is plausible and adequately detailed.',
+    'Exhibiting Depth':
+      'Central claim (thesis) and supporting claims are relevant, precise, and/or complex and consistently developed with substantive and/or specific evidence and coherent and/or persuasive reasoning.'
+  },
+  'Style and Revision': {
+    Emerging:
+      "Language use is in need of further editing and revision as it is lacking in range, accuracy and/or the employment of rhetorical strategies or stylistic techniques that would support the purpose of the work. The tone, level of formality, and/or adherence to style guidelines for referencing and citations (if needed) may be inappropriate or inconsistent.",
+    Developing:
+      "Language use would benefit from a more careful process of outlining, editing, and/or revision to ensure greater accuracy and that the employment of rhetorical strategies and/or stylistic techniques are effective for the work's purpose. The tone, level of formality, and/or adherence to style guidelines for referencing and citations (if needed) may also need to be more consistently maintained throughout the work.",
+    Exhibiting:
+      "Language use is generally accurate, employing rhetorical strategies and/or stylistic techniques in ways that contribute to the work's purpose and that is achieved through adequate engagement with a process of outlining, editing, and revision. An appropriate tone, level of formality, and/or adherence to style guidelines for referencing and citations (if needed) is adequately maintained throughout the work.",
+    'Exhibiting Depth':
+      "Consistently uses language with accuracy, range, and precision, employing rhetorical strategies and/or stylistic techniques in ways that are effective for the work's purpose and that is achieved through a process of outlining, editing, and revision. An appropriate tone, level of formality, and/or adherence to style guidelines for referencing and citations (if needed) is expertly maintained throughout the work."
+  },
+
+  /* ── SS: Understanding and Applying Concepts ── */
+  'Civics and Citizenship': {
+    Emerging:
+      'Begins to demonstrate a cursory or foundational understanding of the targeted areas of knowledge of Civics and Citizenship that is lacking in accuracy, specificity, and/or relevance to the assessment task or in applying concepts to authentic or atypical situations.',
+    Developing:
+      'Demonstrates some understanding of the targeted areas of knowledge of Civics and Citizenship that is in need of greater accuracy, specificity, elaboration, and/or relevance to the assessment task or in applying concepts to authentic or atypical situations.',
+    Exhibiting:
+      'Exhibits and applies an accurate and sufficiently detailed understanding of areas of knowledge of Civics and Citizenship relevant to the assessment task and/or to authentic or atypical contexts.',
+    'Exhibiting Depth':
+      'Skillfully applies and consistently demonstrates a precise, nuanced, and/or comprehensive understanding of areas of knowledge of Civics and Citizenship relevant to the assessment task and/or to authentic or atypical contexts.'
+  },
+  'Economics, Trade, and Markets': {
+    Emerging:
+      'Begins to demonstrate a cursory or foundational understanding of the targeted areas of knowledge of Economics, Trade, and Markets that is lacking in accuracy, specificity, and/or relevance to the assessment task or in applying concepts to authentic or atypical situations.',
+    Developing:
+      'Demonstrates some understanding of the targeted areas of knowledge of Economics, Trade, and Markets that is in need of greater accuracy, specificity, elaboration, and/or relevance to the assessment task or in applying concepts to authentic or atypical situations.',
+    Exhibiting:
+      'Exhibits and applies an accurate and sufficiently detailed understanding of areas of knowledge of Economics, Trade, and Markets relevant to the assessment task and/or to authentic or atypical contexts.',
+    'Exhibiting Depth':
+      'Skillfully applies and consistently demonstrates a precise, nuanced, and/or comprehensive understanding of areas of knowledge of Economics, Trade, and Markets relevant to the assessment task and/or to authentic or atypical contexts.'
+  },
+  'Place, Space, and Human - Environment Interaction': {
+    Emerging:
+      'Begins to demonstrate a cursory or foundational understanding of the targeted areas of knowledge of Place, Space, and Human-Environment Interaction that is lacking in accuracy, specificity, and/or relevance to the assessment task or in applying concepts to authentic or atypical situations.',
+    Developing:
+      'Demonstrates some understanding of the targeted areas of knowledge of Place, Space, and Human-Environment Interaction that is in need of greater accuracy, specificity, elaboration, and/or relevance to the assessment task or in applying concepts to authentic or atypical situations.',
+    Exhibiting:
+      'Exhibits and applies an accurate and sufficiently detailed understanding of areas of knowledge of Place, Space, and Human-Environment Interaction relevant to the assessment task and/or to authentic or atypical contexts.',
+    'Exhibiting Depth':
+      'Skillfully applies and consistently demonstrates a precise, nuanced, and/or comprehensive understanding of areas of knowledge of Place, Space, and Human-Environment Interaction relevant to the assessment task and/or to authentic or atypical contexts.'
+  },
+  'Change, Continuity, and Perspectives': {
+    Emerging:
+      'Begins to demonstrate a cursory or foundational understanding of the targeted areas of knowledge of Change, Continuity, and Perspective that is lacking in accuracy, specificity, and/or relevance to the assessment task or in applying concepts to authentic or atypical situations.',
+    Developing:
+      'Demonstrates some understanding of the targeted areas of knowledge of Change, Continuity, and Perspective that is in need of greater accuracy, specificity, elaboration, and/or relevance to the assessment task or in applying concepts to authentic or atypical situations.',
+    Exhibiting:
+      'Exhibits and applies an accurate and sufficiently detailed understanding of areas of knowledge of Change, Continuity, and Perspective relevant to the assessment task and/or to authentic or atypical contexts.',
+    'Exhibiting Depth':
+      'Skillfully applies and consistently demonstrates a precise, nuanced, and/or comprehensive understanding of areas of knowledge of Change, Continuity, and Perspective relevant to the assessment task and/or to authentic or atypical contexts.'
+  },
+
+  /* ── SS: Inquiry and Action ── */
+  'Researching and Inquiring': {
+    Emerging:
+      'Documents or demonstrates skills required for inquiry and research in limited ways with research questions that may be lacking in relevance or precision, sources that may be limited in range or credibility, and/or the need to include multiple or conflicting perspectives from which plausible conclusions can be drawn or with which a process for continued research could be proposed.',
+    Developing:
+      'Partially documents or demonstrates skills required for inquiry and research with areas for growth, including the need to craft more precise or compelling questions, to select or further evaluate a greater range of sources for their credibility and corroborative value, and/or to further consider and synthesize multiple or conflicting perspectives from which more plausible conclusions could be drawn or with which a process for continued research could be revised and refined.',
+    Exhibiting:
+      'Adequately documents or demonstrates skills required for inquiry and research, which may include the crafting of relevant questions, the selection and evaluation of appropriate sources for their credibility and corroborative value, and/or the inclusion of multiple or conflicting perspectives from which conclusions can be drawn or with which a process for continued research can be revised and refined.',
+    'Exhibiting Depth':
+      'Consistently and carefully documents or demonstrates skills required for inquiry and research, which may include the crafting of compelling questions, the selection and evaluation of a range of sources for their credibility and corroborative value, and/or the consideration of multiple or conflicting perspectives from which conclusions are persuasively synthesized or with which a process for continued research is revised and refined.'
+  },
+  'Communicating Conclusions and Taking Action': {
+    Emerging:
+      'Begins to make use of discursive strategies and oral, print, and/or digital technologies in the presentation of arguments, ideas, and/or calls to action that are limited by a lack of consideration for the audience or rhetorical situation and/or the lack of connections to relevant disciplinary lenses or interdisciplinary knowledge and understanding.',
+    Developing:
+      'Attempts to use discursive strategies and oral, print, and/or digital technologies in the presentation of ideas, arguments, and/or calls to action that would benefit from greater consideration of the needs of the audience or rhetorical situation and/or more precise connections to disciplinary lenses or interdisciplinary knowledge and understanding.',
+    Exhibiting:
+      'Makes appropriate use of discursive strategies and oral, print, and/or digital technologies in the presentation of well-developed ideas, arguments, and/or options for individual or collective action that show consideration for the audience or rhetorical situation and that are adequately informed by disciplinary lenses or interdisciplinary knowledge and understanding.',
+    'Exhibiting Depth':
+      'Makes skillful use of discursive strategies and oral, print, and/or digital technologies in presenting evocative ideas, arguments, and/or compelling options for individual or collective action that are persuasively tailored for the audience or rhetorical situation and that are convincingly informed by disciplinary lenses or interdisciplinary knowledge and understanding.'
+  }
+};
+
+const EMPTY_DESCRIPTORS = {
+  Emerging: '',
+  Developing: '',
+  Exhibiting: '',
+  'Exhibiting Depth': ''
+};
+
+const getDescriptorsForOutcome = (outcome) =>
+  TAXONOMY_DESCRIPTORS[outcome]
+    ? { ...TAXONOMY_DESCRIPTORS[outcome] }
+    : { ...EMPTY_DESCRIPTORS };
+
 const COURSES = {
   'Humanities 9: English & Social Studies': {
     grade: '9',
@@ -38,17 +185,17 @@ const COURSES = {
         'Analyzing Language'
       ],
       'Composition and Communication': [
-       'Generating Text Organization and Structure',
-       'Generating Claims, Evidence, and Reasoning',
-       'Style and Revision'
+        'Generating Text Organization and Structure',
+        'Generating Claims, Evidence, and Reasoning',
+        'Style and Revision'
       ],
       'Understanding and Applying Concepts': [
         'Civics and Citizenship',
         'Economics, Trade, and Markets',
         'Place, Space, and Human - Environment Interaction',
-        'Change, Continuity, and Perspectives',,
+        'Change, Continuity, and Perspectives'
       ],
-      'Inquiry and Action':[
+      'Inquiry and Action': [
         'Researching and Inquiring',
         'Communicating Conclusions and Taking Action'
       ]
@@ -63,17 +210,17 @@ const COURSES = {
         'Analyzing Language'
       ],
       'Composition and Communication': [
-       'Generating Text Organization and Structure',
-       'Generating Claims, Evidence, and Reasoning',
-       'Style and Revision'
+        'Generating Text Organization and Structure',
+        'Generating Claims, Evidence, and Reasoning',
+        'Style and Revision'
       ],
       'Understanding and Applying Concepts': [
         'Civics and Citizenship',
         'Economics, Trade, and Markets',
         'Place, Space, and Human - Environment Interaction',
-        'Change, Continuity, and Perspectives',,
+        'Change, Continuity, and Perspectives'
       ],
-      'Inquiry and Action':[
+      'Inquiry and Action': [
         'Researching and Inquiring',
         'Communicating Conclusions and Taking Action'
       ]
@@ -104,12 +251,7 @@ const EMPTY_CRITERION = {
   name: '',
   reportingCategory: '',
   learningOutcome: '',
-  descriptors: {
-    Emerging: '',
-    Developing: '',
-    Exhibiting: '',
-    'Exhibiting Depth': ''
-  }
+  descriptors: { ...EMPTY_DESCRIPTORS }
 };
 
 const getOutcomeByIndex = (allOutcomes, index) => allOutcomes[index] || '';
@@ -130,19 +272,15 @@ const createCriterion = (
   id,
   name,
   learningOutcome,
-  criterionString,
+  _criterionString,
   reportingCategory = ''
 ) => ({
   id,
   name,
   reportingCategory,
   learningOutcome,
-  descriptors: {
-    Emerging: `Beginning level: ${criterionString}`,
-    Developing: `Developing level: ${criterionString}`,
-    Exhibiting: `Proficient level: ${criterionString}`,
-    'Exhibiting Depth': `Advanced level: ${criterionString}`
-  }
+  // Auto-fill from taxonomy when we know the outcome; otherwise blank.
+  descriptors: getDescriptorsForOutcome(learningOutcome)
 });
 
 const buildCriteriaFromAssessment = (type, course) => {
@@ -305,15 +443,10 @@ function App() {
         name: '',
         reportingCategory: '',
         learningOutcome: '',
-        descriptors: {
-          Emerging: '',
-          Developing: '',
-          Exhibiting: '',
-          'Exhibiting Depth': ''
-        }
+        descriptors: { ...EMPTY_DESCRIPTORS }
       }
     ]);
-  }; 
+  };
 
   const removeCriterion = (id) => {
     if (criteria.length > 1) setCriteria(criteria.filter((c) => c.id !== id));
@@ -333,6 +466,41 @@ function App() {
     );
   };
 
+  /* ── Single handler so we can update outcome + category +
+        auto-fill the 4 descriptors in one state set ── */
+  const handleLearningOutcomeChange = (id, selectedOutcome) => {
+    setCriteria((prev) =>
+      prev.map((c) => {
+        if (c.id !== id) return c;
+
+        // If a descriptor was manually edited (anything nonempty that
+        // doesn't match the previous taxonomy entry), keep it — otherwise
+        // auto-fill from the taxonomy.
+        const previousTaxonomy = getDescriptorsForOutcome(c.learningOutcome);
+        const newTaxonomy = getDescriptorsForOutcome(selectedOutcome);
+
+        const mergedDescriptors = { ...c.descriptors };
+        HKIS_LEVELS.forEach((level) => {
+          const currentVal = c.descriptors[level.name] || '';
+          const wasAutoFilled =
+            currentVal === '' || currentVal === previousTaxonomy[level.name];
+          if (wasAutoFilled) {
+            mergedDescriptors[level.name] = newTaxonomy[level.name];
+          }
+        });
+
+        return {
+          ...c,
+          learningOutcome: selectedOutcome,
+          reportingCategory:
+            c.reportingCategory ||
+            getReportingCategoryForOutcome(currentCourse, selectedOutcome),
+          descriptors: mergedDescriptors
+        };
+      })
+    );
+  };
+
   const handleAssessmentTypeChange = (value) => {
     setAssignmentType(value);
 
@@ -349,67 +517,64 @@ function App() {
         reportingCategory: getReportingCategoryForOutcome(
           currentCourse,
           criterion.learningOutcome
-        )
+        ),
+        descriptors: getDescriptorsForOutcome(criterion.learningOutcome)
       }))
     );
   };
 
   return (
-    
-<div> 
-    <div className="header">
+    <div>
+      <div className="header">
         <h1>HKIS Rubric Creator</h1>
       </div>
 
+      <div className="app-wrapper">
+        {/* ── Tabs ── */}
+        <div className="tabs">
+          {['build', 'preview'].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+            >
+              {tab === 'build' ? '📝 Build Rubric' : '👁️ Preview & Print'}
+            </button>
+          ))}
+        </div>
 
-    <div className="app-wrapper">
-      {/* ── Header ── */}
-
-      {/* ── Tabs ── */}
-      <div className="tabs">
-        {['build', 'preview'].map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-          >
-            {tab === 'build' ? '📝 Build Rubric' : '👁️ Preview & Print'}
-          </button>
-        ))}
-      </div>
-
-      {/* ══════════════ BUILD TAB ══════════════ */}
-      {activeTab === 'build' && (
-        <div>
-          {/* Course Selection */}
-          <div className="card">
-            <h2 className="card-title">Select Course</h2>
-            <div className="field">
-              <label>Course</label>
-              <select
-                value={selectedCourse}
-                onChange={(e) => setSelectedCourse(e.target.value)}
-                className="course-select"
-              >
-                <option value="">Choose a course…</option>
-                <optgroup label="Grade 9">
-                  <option>Humanities 9: English &amp; Social Studies</option>
-                </optgroup>
-                <optgroup label="Grade 10">
-                  <option>Humanities 10: English &amp; Social Studies</option>
-                </optgroup>
-              </select>
-            </div>
-            {selectedCourse && (
-              <div className="course-badge">
-                <span className="badge-dot" />
-                <span>
-                  <strong>{selectedCourse}</strong>
-                  <span className="badge-grade"> · Grade {currentCourse.grade}</span>
-                </span>
+        {/* ══════════════ BUILD TAB ══════════════ */}
+        {activeTab === 'build' && (
+          <div>
+            {/* Course Selection */}
+            <div className="card">
+              <h2 className="card-title">Select Course</h2>
+              <div className="field">
+                <label>Course</label>
+                <select
+                  value={selectedCourse}
+                  onChange={(e) => setSelectedCourse(e.target.value)}
+                  className="course-select"
+                >
+                  <option value="">Choose a course…</option>
+                  <optgroup label="Grade 9">
+                    <option>Humanities 9: English &amp; Social Studies</option>
+                  </optgroup>
+                  <optgroup label="Grade 10">
+                    <option>Humanities 10: English &amp; Social Studies</option>
+                  </optgroup>
+                </select>
               </div>
-            )}
-          </div>
+              {selectedCourse && (
+                <div className="course-badge">
+                  <span className="badge-dot" />
+                  <span>
+                    <strong>{selectedCourse}</strong>
+                    <span className="badge-grade"> · Grade {currentCourse.grade}</span>
+                  </span>
+                </div>
+              )}
+            </div>
 
           {/* Rubric Details */}
           <div className="card">
@@ -447,247 +612,236 @@ function App() {
           </div>
 
 
-          {/* Criteria */}
-          <div className="criteria-header">
-            <h2 className="card-title" style={{ margin: 0 }}>
-              Assessment Criteria
-            </h2>
-            <button className="btn-primary" onClick={addCriterion}>
-              + Add Criterion
-            </button>
-          </div>
+            {/* Criteria */}
+            <div className="criteria-header">
+              <h2 className="card-title" style={{ margin: 0 }}>
+                Assessment Criteria
+              </h2>
+              <button className="btn-primary" onClick={addCriterion}>
+                + Add Criterion
+              </button>
+            </div>
 
-          {criteria.map((criterion, index) => (
-            <div key={criterion.id} className="card criterion-card">
-              <div className="criterion-top">
-                <span className="criterion-label">Criterion {index + 1}</span>
-                {criteria.length > 1 && (
-                  <button
-                    className="remove-btn"
-                    onClick={() => removeCriterion(criterion.id)}
-                  >
-                    ✕ Remove
-                  </button>
-                )}
-              </div>
-
-              <div className="grid-3" style={{ marginBottom: '16px' }}>
-                <div className="field">
-                  <label>Criterion Name</label>
-                  <input
-                    value={criterion.name}
-                    onChange={(e) =>
-                      updateCriterion(criterion.id, 'name', e.target.value)
-                    }
-                    placeholder="e.g., Thesis & Argument, Use of Evidence…"
-                  />
+            {criteria.map((criterion, index) => (
+              <div key={criterion.id} className="card criterion-card">
+                <div className="criterion-top">
+                  <span className="criterion-label">Criterion {index + 1}</span>
+                  {criteria.length > 1 && (
+                    <button
+                      className="remove-btn"
+                      onClick={() => removeCriterion(criterion.id)}
+                    >
+                      ✕ Remove
+                    </button>
+                  )}
                 </div>
-                <div className="field">
-                  <label>Reporting Category</label>
-                  <select
-                    value={criterion.reportingCategory || ''}
-                    onChange={(e) =>
-                      updateCriterion(
-                        criterion.id,
-                        'reportingCategory',
-                        e.target.value
-                      )
-                    }
-                  >
-                    <option value="">
-                      {selectedCourse
-                        ? 'Select a reporting category…'
-                        : '← Select a course first'}
-                    </option>
-                    {currentCourse &&
-                      Object.keys(currentCourse.outcomes).map((category) => (
-                        <option key={category} value={category}>
-                          {category}
-                        </option>
-                      ))}
-                    <option value="Interdisciplinary">Interdisciplinary</option>
-                    <option value="Process & Skills">Process & Skills</option>
-                  </select>
-                </div>
-                <div className="field">
-                  <label>Linked Learning Outcome</label>
-                  <select
-                    value={criterion.learningOutcome}
-                    onChange={(e) => {
-                      const selectedOutcome = e.target.value;
-                      updateCriterion(
-                        criterion.id,
-                        'learningOutcome',
-                        selectedOutcome
-                      );
 
-                      if (!criterion.reportingCategory) {
+                <div className="grid-3" style={{ marginBottom: '16px' }}>
+                  <div className="field">
+                    <label>Criterion Name</label>
+                    <input
+                      value={criterion.name}
+                      onChange={(e) =>
+                        updateCriterion(criterion.id, 'name', e.target.value)
+                      }
+                      placeholder="e.g., Thesis & Argument, Use of Evidence…"
+                    />
+                  </div>
+                  <div className="field">
+                    <label>Reporting Category</label>
+                    <select
+                      value={criterion.reportingCategory || ''}
+                      onChange={(e) =>
                         updateCriterion(
                           criterion.id,
                           'reportingCategory',
-                          getReportingCategoryForOutcome(
-                            currentCourse,
-                            selectedOutcome
-                          )
-                        );
-                      }
-                    }}
-                  >
-                    <option value="">
-                      {selectedCourse
-                        ? 'Select a learning outcome…'
-                        : '← Select a course first'}
-                    </option>
-                    {currentCourse &&
-                      Object.entries(currentCourse.outcomes).map(
-                        ([category, outcomes]) => (
-                          <optgroup key={category} label={category}>
-                            {outcomes.map((o) => (
-                              <option key={o} value={o}>
-                                {o}
-                              </option>
-                            ))}
-                          </optgroup>
-                        )
-                      )}
-                  </select>
-                </div>
-              </div>
-
-              <div className="descriptor-grid">
-                {HKIS_LEVELS.map((level) => (
-                  <div key={level.name}>
-                    <label
-                      className="level-label"
-                      style={{ color: level.borderColor }}
-                    >
-                      {level.name}
-                    </label>
-                    <textarea
-                      value={criterion.descriptors[level.name]}
-                      onChange={(e) =>
-                        updateDescriptor(
-                          criterion.id,
-                          level.name,
                           e.target.value
                         )
                       }
-                      placeholder={`What does ${level.name} look like here?`}
-                      rows={5}
-                      style={{
-                        backgroundColor: level.color,
-                        borderColor: level.borderColor
-                      }}
-                    />
-                    
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-
-          <div className="center-btn">
-            <button
-              className="btn-primary btn-large"
-              onClick={() => setActiveTab('preview')}
-            >
-              Preview Rubric →
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* ══════════════ PREVIEW TAB ══════════════ */}
-      {activeTab === 'preview' && (
-        <div>
-          <div className="preview-header">
-            <h2 className="card-title" style={{ margin: 0 }}>
-              Rubric Preview
-            </h2>
-            <button className="btn-dark" onClick={() => window.print()}>
-              🖨️ Print Rubric
-            </button>
-          </div>
-
-          <div className="card printable" id="printable-rubric">
-            {/* Rubric Header */}
-            <div className="rubric-header-block">
-              <div className="rubric-school-tag">HKIS Humanities Department</div>
-              <h1 className="rubric-main-title">
-                {rubricTitle || 'Untitled Rubric'}
-              </h1>
-              <p className="rubric-meta">
-                {selectedCourse || 'No course selected'}
-                {assignmentType && ` · ${assignmentType}`}
-                {teacherName && ` · ${teacherName}`}
-              </p>
-            </div>
-
-            {/* Table */}
-            <table className="rubric-table">
-              <thead>
-                <tr>
-                  <th className="th-criterion">Criterion</th>
-                  {HKIS_LEVELS.map((level) => (
-                    <th
-                      key={level.name}
-                      style={{ backgroundColor: level.borderColor }}
                     >
-                      {level.name}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {criteria.map((criterion, index) => (
-                  <tr
-                    key={criterion.id}
-                    style={{
-                      backgroundColor: index % 2 === 0 ? '#faf8f5' : 'white'
-                    }}
-                  >
-                    <td className="td-criterion">
-                      <div className="criterion-name">
-                        {criterion.name || `Criterion ${index + 1}`}
-                      </div>
-                      {criterion.reportingCategory && (
-                        <div className="criterion-reporting">
-                          Reporting Category: {criterion.reportingCategory}
-                        </div>
-                      )}
-                      {criterion.learningOutcome && (
-                        <div className="criterion-outcome">
-                          {criterion.learningOutcome}
-                        </div>
-                      )}
-                    </td>
-                    {HKIS_LEVELS.map((level) => (
-                      <td
-                        key={level.name}
-                        className="td-descriptor"
-                        style={{ borderLeft: `3px solid ${level.borderColor}` }}
+                      <option value="">
+                        {selectedCourse
+                          ? 'Select a reporting category…'
+                          : '← Select a course first'}
+                      </option>
+                      {currentCourse &&
+                        Object.keys(currentCourse.outcomes).map((category) => (
+                          <option key={category} value={category}>
+                            {category}
+                          </option>
+                        ))}
+                      <option value="Interdisciplinary">Interdisciplinary</option>
+                      <option value="Process & Skills">Process & Skills</option>
+                    </select>
+                  </div>
+                  <div className="field">
+                    <label>Linked Learning Outcome</label>
+                    <select
+                      value={criterion.learningOutcome}
+                      onChange={(e) =>
+                        handleLearningOutcomeChange(criterion.id, e.target.value)
+                      }
+                    >
+                      <option value="">
+                        {selectedCourse
+                          ? 'Select a learning outcome…'
+                          : '← Select a course first'}
+                      </option>
+                      {currentCourse &&
+                        (criterion.reportingCategory &&
+                        currentCourse.outcomes[criterion.reportingCategory]
+                          ? currentCourse.outcomes[
+                              criterion.reportingCategory
+                            ].map((o) => (
+                              <option key={o} value={o}>
+                                {o}
+                              </option>
+                            ))
+                          : Object.entries(currentCourse.outcomes).map(
+                              ([category, outcomes]) => (
+                                <optgroup key={category} label={category}>
+                                  {outcomes.map((o) => (
+                                    <option key={o} value={o}>
+                                      {o}
+                                    </option>
+                                  ))}
+                                </optgroup>
+                              )
+                            ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="descriptor-grid">
+                  {HKIS_LEVELS.map((level) => (
+                    <div key={level.name}>
+                      <label
+                        className="level-label"
+                        style={{ color: level.borderColor }}
                       >
-                        {criterion.descriptors[level.name] || (
-                          <span className="empty-descriptor">—</span>
-                        )}
-                      </td>
+                        {level.name}
+                      </label>
+                      <textarea
+                        value={criterion.descriptors[level.name]}
+                        onChange={(e) =>
+                          updateDescriptor(
+                            criterion.id,
+                            level.name,
+                            e.target.value
+                          )
+                        }
+                        placeholder={`What does ${level.name} look like here?`}
+                        rows={7}
+                        style={{
+                          backgroundColor: level.color,
+                          borderColor: level.borderColor
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            <div className="center-btn">
+              <button
+                className="btn-primary btn-large"
+                onClick={() => setActiveTab('preview')}
+              >
+                Preview Rubric →
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* ══════════════ PREVIEW TAB ══════════════ */}
+        {activeTab === 'preview' && (
+          <div>
+            <div className="preview-header">
+              <h2 className="card-title" style={{ margin: 0 }}>
+                Rubric Preview
+              </h2>
+              <button className="btn-dark" onClick={() => window.print()}>
+                🖨️ Print Rubric
+              </button>
+            </div>
+
+            <div className="card printable" id="printable-rubric">
+              <div className="rubric-header-block">
+                <div className="rubric-school-tag">HKIS Humanities Department</div>
+                <h1 className="rubric-main-title">
+                  {rubricTitle || 'Untitled Rubric'}
+                </h1>
+                <p className="rubric-meta">
+                  {selectedCourse || 'No course selected'}
+                  {assignmentType && ` · ${assignmentType}`}
+                  {teacherName && ` · ${teacherName}`}
+                </p>
+              </div>
+
+              <table className="rubric-table">
+                <thead>
+                  <tr>
+                    <th className="th-criterion">Criterion</th>
+                    {HKIS_LEVELS.map((level) => (
+                      <th
+                        key={level.name}
+                        style={{ backgroundColor: level.borderColor }}
+                      >
+                        {level.name}
+                      </th>
                     ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {criteria.map((criterion, index) => (
+                    <tr
+                      key={criterion.id}
+                      style={{
+                        backgroundColor: index % 2 === 0 ? '#faf8f5' : 'white'
+                      }}
+                    >
+                      <td className="td-criterion">
+                        <div className="criterion-name">
+                          {criterion.name || `Criterion ${index + 1}`}
+                        </div>
+                        {criterion.reportingCategory && (
+                          <div className="criterion-reporting">
+                            Reporting Category: {criterion.reportingCategory}
+                          </div>
+                        )}
+                        {criterion.learningOutcome && (
+                          <div className="criterion-outcome">
+                            {criterion.learningOutcome}
+                          </div>
+                        )}
+                      </td>
+                      {HKIS_LEVELS.map((level) => (
+                        <td
+                          key={level.name}
+                          className="td-descriptor"
+                          style={{ borderLeft: `3px solid ${level.borderColor}` }}
+                        >
+                          {criterion.descriptors[level.name] || (
+                            <span className="empty-descriptor">—</span>
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
 
-            <div className="scale-footer">
-              <strong>HKIS General Academic Scale:</strong> Emerging →
-              Developing → Exhibiting → Exhibiting Depth
+              <div className="scale-footer">
+                <strong>HKIS General Academic Scale:</strong> Emerging →
+                Developing → Exhibiting → Exhibiting Depth
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
-    </div>    
   );
-  
 }
 
 export default App;
