@@ -514,10 +514,12 @@ function App() {
     setCriteria(
       generatedCriteria.map((criterion) => ({
         ...criterion,
-        reportingCategory: getReportingCategoryForOutcome(
-          currentCourse,
-          criterion.learningOutcome
-        ),
+        reportingCategory: autoFillReportingCategories
+          ? getReportingCategoryForOutcome(
+              currentCourse,
+              criterion.learningOutcome
+            )
+          : '',
         descriptors: getDescriptorsForOutcome(criterion.learningOutcome)
       }))
     );
@@ -525,8 +527,12 @@ function App() {
 
   return (
     <div>
-      <div className="header">
-        <h1>HKIS Rubric Creator</h1>
+      <div className="header"> 
+        
+        <h1>
+          <img src="logohkis512.png" width="80" height="80" alt="HKIS Logo" />
+          HKIS Rubric Creator
+        </h1>
       </div>
 
       <div className="app-wrapper">
@@ -669,8 +675,6 @@ function App() {
                             {category}
                           </option>
                         ))}
-                      <option value="Interdisciplinary">Interdisciplinary</option>
-                      <option value="Process & Skills">Process & Skills</option>
                     </select>
                   </div>
                   <div className="field">
