@@ -227,3 +227,32 @@ textarea { resize: vertical; }
   color: #999;
   margin-bottom: 6px;
 }
+/* ── Preview action buttons ── */
+.preview-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* ── Copy confirmation toast ── */
+.copy-toast {
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-family: Avenir, sans-serif;
+}
+.copy-toast-success {
+  background-color: #eafaf1;
+  border: 1px solid #27ae60;
+  color: #1e7e44;
+}
+.copy-toast-error {
+  background-color: #fdecea;
+  border: 1px solid #e74c3c;
+  color: #a93226;
+}
+
+/* Hide copy/print buttons when actually printing */
+@media print {
+  .preview-actions, .copy-toast { display: none !important; }
+}
