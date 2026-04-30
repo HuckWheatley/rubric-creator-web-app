@@ -4,37 +4,34 @@ import './App.css';
 const HKIS_LEVELS = [
   {
     name: 'Emerging',
-    color: '#e8f4fd',
-    borderColor: '#3498db',
+    color: '#fadbd8',
+    borderColor: '#922b21',
     description: 'Demonstrates emerging proficiency in the standard.'
   },
   {
     name: 'Developing',
-    color: '#fef9e7',
-    borderColor: '#f39c12',
+    color: '#fcf3cf',
+    borderColor: '#c79100',
     description: 'Demonstrates foundational knowledge but not yet exhibiting proficiency.'
   },
   {
     name: 'Exhibiting',
-    color: '#eafaf1',
-    borderColor: '#27ae60',
+    color: '#ecf0f1',
+    borderColor: '#7f8c8d',
     description: 'Exhibits proficiency — demonstrates targeted understanding of knowledge and skills.'
   },
   {
     name: 'Exhibiting Depth',
-    color: '#f4ecf7',
-    borderColor: '#8e44ad',
+    color: '#d6eaf8',
+    borderColor: '#1f618d',
     description: 'Transfers learning to authentic situations with creativity and sophistication.'
   }
 ];
 
 /* ══════════════════════════════════════════════════════════════
    HKIS Schoolwide ELA + SS Reporting Taxonomy descriptors.
-   Keyed by Learning Outcome name. When a teacher picks a
-   learning outcome, we auto-fill all four descriptor boxes.
    ══════════════════════════════════════════════════════════════ */
 const TAXONOMY_DESCRIPTORS = {
-  /* ── ELA: Comprehension and Analysis ── */
   'Analyzing Ideas and Themes': {
     Emerging:
       "Begins to identify or describe the text's ideas, themes, and/or arguments in ways that are lacking in accuracy, specificity, and/or comprehension of the text's or author's purpose, intended audience, and/or broader context.",
@@ -65,8 +62,6 @@ const TAXONOMY_DESCRIPTORS = {
     'Exhibiting Depth':
       'Consistently demonstrates a precise and persuasive understanding of significant stylistic features, rhetorical strategies, and/or literary techniques and how they contribute to the purpose and development of the text.'
   },
-
-  /* ── ELA: Composition and Communication ── */
   'Generating Text Organization and Structure': {
     Emerging:
       'Begins to adhere to or apply formal conventions and structural features in ways that lack consistency, resulting in a text or product in need of greater clarity and cohesion.',
@@ -97,8 +92,6 @@ const TAXONOMY_DESCRIPTORS = {
     'Exhibiting Depth':
       "Consistently uses language with accuracy, range, and precision, employing rhetorical strategies and/or stylistic techniques in ways that are effective for the work's purpose and that is achieved through a process of outlining, editing, and revision. An appropriate tone, level of formality, and/or adherence to style guidelines for referencing and citations (if needed) is expertly maintained throughout the work."
   },
-
-  /* ── SS: Understanding and Applying Concepts ── */
   'Civics and Citizenship': {
     Emerging:
       'Begins to demonstrate a cursory or foundational understanding of the targeted areas of knowledge of Civics and Citizenship that is lacking in accuracy, specificity, and/or relevance to the assessment task or in applying concepts to authentic or atypical situations.',
@@ -139,8 +132,6 @@ const TAXONOMY_DESCRIPTORS = {
     'Exhibiting Depth':
       'Skillfully applies and consistently demonstrates a precise, nuanced, and/or comprehensive understanding of areas of knowledge of Change, Continuity, and Perspective relevant to the assessment task and/or to authentic or atypical contexts.'
   },
-
-  /* ── SS: Inquiry and Action ── */
   'Researching and Inquiring': {
     Emerging:
       'Documents or demonstrates skills required for inquiry and research in limited ways with research questions that may be lacking in relevance or precision, sources that may be limited in range or credibility, and/or the need to include multiple or conflicting perspectives from which plausible conclusions can be drawn or with which a process for continued research could be proposed.',
@@ -279,7 +270,6 @@ const createCriterion = (
   name,
   reportingCategory,
   learningOutcome,
-  // Auto-fill from taxonomy when we know the outcome; otherwise blank.
   descriptors: getDescriptorsForOutcome(learningOutcome)
 });
 
@@ -425,6 +415,133 @@ const buildCriteriaFromAssessment = (type, course) => {
   return [EMPTY_CRITERION];
 };
 
+/* ── Escape helper for safe HTML output ── */
+const escapeHtml = (str) =>
+  String(str ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+/* ── Build a rich-HTML version of the rubric for clipboard paste
+      (works in Google Docs, Word, Outlook, etc.) ── */
+const buildRubricHtml = ({
+  rubricTitle,
+  selectedCourse,
+  assignmentType,
+  teacherName,
+  criteria
+}) => {
+  const metaParts = [
+    selectedCourse || 'No course selected',
+    assignmentType,
+    teacherName
+  ].filter(Boolean);
+
+  const headerCells = HKIS_LEVELS.map(
+    (lvl) =>
+      `<th style="background-color:${lvl.borderColor};color:#ffffff;padding:10px 12px;font-family:Arial,sans-serif;font-size:13px;font-weight:bold;text-align:center;border:2px solid #000000;">${escapeHtml(
+        lvl.name
+      )}</th>`
+  ).join('');
+
+  const rows = criteria
+    .map((criterion, index) => {
+      const bg = index % 2 === 0 ? '#faf8f5' : '#ffffff';
+      const criterionCell = `
+        <td style="padding:12px;border:2px solid #000000;background-color:${bg};vertical-align:top;font-family:Arial,sans-serif;font-size:12px;width:18%;">
+          <div style="font-weight:bold;color:#012a42;font-size:13px;margin-bottom:4px;">${escapeHtml(
+            criterion.name || `Criterion ${index + 1}`
+          )}</div>
+          ${
+            criterion.reportingCategory
+              ? `<div style="font-size:11px;color:#8b1a1a;font-weight:bold;margin-bottom:3px;">Reporting Category: ${escapeHtml(
+                  criterion.reportingCategory
+                )}</div>`
+              : ''
+          }
+          ${
+            criterion.learningOutcome
+              ? `<div style="font-size:11px;color:#888888;font-style:italic;">${escapeHtml(
+                  criterion.learningOutcome
+                )}</div>`
+              : ''
+          }
+        </td>`;
+
+      const descriptorCells = HKIS_LEVELS.map(
+        (lvl) =>
+          `<td style="padding:12px;border:2px solid #000000;background-color:${bg};vertical-align:top;font-family:Arial,sans-serif;font-size:12px;line-height:1.5;">${escapeHtml(
+            criterion.descriptors[lvl.name] || '—'
+          )}</td>`
+      ).join('');
+
+      return `<tr>${criterionCell}${descriptorCells}</tr>`;
+    })
+    .join('');
+
+  return `
+<div style="font-family:Arial,sans-serif;color:#333333;">
+  <div style="border-bottom:3px solid #012a42;padding-bottom:10px;margin-bottom:14px;">
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#999999;margin-bottom:4px;">HKIS Humanities Department</div>
+    <div style="font-size:20px;color:#012a42;font-weight:bold;margin-bottom:4px;">${escapeHtml(
+      rubricTitle || 'Untitled Rubric'
+    )}</div>
+    <div style="font-size:12px;color:#777777;">${escapeHtml(metaParts.join(' · '))}</div>
+  </div>
+  <table cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;border:2px solid #000000;">
+    <thead>
+      <tr>
+        <th style="background-color:#012a42;color:#ffffff;padding:10px 12px;font-family:Arial,sans-serif;font-size:13px;font-weight:bold;text-align:left;border:2px solid #000000;width:18%;">Criterion</th>
+        ${headerCells}
+      </tr>
+    </thead>
+    <tbody>${rows}</tbody>
+  </table>
+  <div style="margin-top:14px;padding:8px 12px;background-color:#f4f4f4;border-radius:4px;font-family:Arial,sans-serif;font-size:11px;color:#555555;">
+    <strong>HKIS General Academic Scale:</strong> Emerging → Developing → Exhibiting → Exhibiting Depth
+  </div>
+</div>`.trim();
+};
+
+/* ── Plain-text fallback ── */
+const buildRubricPlainText = ({
+  rubricTitle,
+  selectedCourse,
+  assignmentType,
+  teacherName,
+  criteria
+}) => {
+  const meta = [selectedCourse, assignmentType, teacherName]
+    .filter(Boolean)
+    .join(' · ');
+
+  const lines = [
+    'HKIS Humanities Department',
+    rubricTitle || 'Untitled Rubric',
+    meta,
+    ''
+  ];
+
+  criteria.forEach((c, i) => {
+    lines.push(`${i + 1}. ${c.name || `Criterion ${i + 1}`}`);
+    if (c.reportingCategory)
+      lines.push(`   Reporting Category: ${c.reportingCategory}`);
+    if (c.learningOutcome) lines.push(`   Outcome: ${c.learningOutcome}`);
+    HKIS_LEVELS.forEach((lvl) => {
+      lines.push(`   • ${lvl.name}: ${c.descriptors[lvl.name] || '—'}`);
+    });
+    lines.push('');
+  });
+
+  lines.push(
+    'HKIS General Academic Scale: Emerging → Developing → Exhibiting → Exhibiting Depth'
+  );
+
+  return lines.join('\n');
+};
+
 function App() {
   const [activeTab, setActiveTab] = useState('build');
   const [selectedCourse, setSelectedCourse] = useState('');
@@ -433,6 +550,7 @@ function App() {
   const [teacherName, setTeacherName] = useState('');
   const [criteria, setCriteria] = useState([EMPTY_CRITERION]);
   const [autoFillReportingCategories, setAutoFillReportingCategories] = useState(true);
+  const [copyStatus, setCopyStatus] = useState('');
 
   const currentCourse = COURSES[selectedCourse] || null;
 
@@ -467,16 +585,11 @@ function App() {
     );
   };
 
-  /* ── Single handler so we can update outcome + category +
-        auto-fill the 4 descriptors in one state set ── */
   const handleLearningOutcomeChange = (id, selectedOutcome) => {
     setCriteria((prev) =>
       prev.map((c) => {
         if (c.id !== id) return c;
 
-        // If a descriptor was manually edited (anything nonempty that
-        // doesn't match the previous taxonomy entry), keep it — otherwise
-        // auto-fill from the taxonomy.
         const previousTaxonomy = getDescriptorsForOutcome(c.learningOutcome);
         const newTaxonomy = getDescriptorsForOutcome(selectedOutcome);
 
@@ -526,10 +639,58 @@ function App() {
     );
   };
 
+  /* ── Copy rubric to clipboard (rich HTML + plain text fallback) ── */
+  const handleCopyRubric = async () => {
+    const payload = {
+      rubricTitle,
+      selectedCourse,
+      assignmentType,
+      teacherName,
+      criteria
+    };
+    const html = buildRubricHtml(payload);
+    const text = buildRubricPlainText(payload);
+
+    try {
+      if (
+        navigator.clipboard &&
+        window.ClipboardItem &&
+        typeof navigator.clipboard.write === 'function'
+      ) {
+        const item = new window.ClipboardItem({
+          'text/html': new Blob([html], { type: 'text/html' }),
+          'text/plain': new Blob([text], { type: 'text/plain' })
+        });
+        await navigator.clipboard.write([item]);
+      } else if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        throw new Error('Clipboard API unavailable');
+      }
+      setCopyStatus('copied');
+      setTimeout(() => setCopyStatus(''), 2200);
+    } catch (err) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        setCopyStatus('copied');
+        setTimeout(() => setCopyStatus(''), 2200);
+      } catch (e) {
+        setCopyStatus('error');
+        setTimeout(() => setCopyStatus(''), 2200);
+      }
+    }
+  };
+
   return (
     <div>
-      <div className="header"> 
-        
+      <div className="header">
         <h1>
           <img src="logohkis512.png" width="80" height="80" alt="HKIS Logo" />
           HKIS Rubric Creator
@@ -765,9 +926,24 @@ function App() {
               <h2 className="card-title" style={{ margin: 0 }}>
                 Rubric Preview
               </h2>
-              <button className="btn-dark" onClick={() => window.print()}>
-                🖨️ Print Rubric
-              </button>
+              <div className="preview-actions">
+                {copyStatus === 'copied' && (
+                  <span className="copy-toast copy-toast-success">
+                    ✓ Copied! Paste into Google Docs or Word
+                  </span>
+                )}
+                {copyStatus === 'error' && (
+                  <span className="copy-toast copy-toast-error">
+                    ✗ Couldn't copy — try again
+                  </span>
+                )}
+                <button className="btn-copy" onClick={handleCopyRubric}>
+                  📋 Copy Rubric
+                </button>
+                <button className="btn-dark" onClick={() => window.print()}>
+                  🖨️ Print Rubric
+                </button>
+              </div>
             </div>
 
             <div className="card printable" id="printable-rubric">
@@ -824,7 +1000,6 @@ function App() {
                         <td
                           key={level.name}
                           className="td-descriptor"
-                          style={{ borderLeft: `3px solid ${level.borderColor}` }}
                         >
                           {criterion.descriptors[level.name] || (
                             <span className="empty-descriptor">—</span>

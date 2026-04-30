@@ -153,17 +153,37 @@ textarea { resize: vertical; }
 .rubric-meta { font-size: 13px; color: #777; }
 
 /* ── Rubric Table ── */
-.rubric-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.rubric-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  border: 2px solid #000;
+}
 .rubric-table thead th {
   padding: 12px;
   color: white;
-  font-weight: normal;
+  font-weight: bold;
   font-size: 14px;
   text-align: center;
+  border: 2px solid #000;
 }
-.th-criterion { background-color: #8b1a1a !important; text-align: left !important; width: 18%; }
-.td-criterion { padding: 14px; border-bottom: 1px solid #e8e0d8; vertical-align: top; width: 18%; }
-.td-descriptor { padding: 14px; border-bottom: 1px solid #e8e0d8; vertical-align: top; line-height: 1.5; }
+.th-criterion {
+  background-color: #012a42 !important;
+  text-align: left !important;
+  width: 18%;
+}
+.td-criterion {
+  padding: 14px;
+  border: 2px solid #000;
+  vertical-align: top;
+  width: 18%;
+}
+.td-descriptor {
+  padding: 14px;
+  border: 2px solid #000;
+  vertical-align: top;
+  line-height: 1.5;
+}
 .criterion-name { font-weight: bold; margin-bottom: 4px; }
 .criterion-reporting {
   font-size: 11px;
@@ -178,7 +198,7 @@ textarea { resize: vertical; }
 .scale-footer {
   margin-top: 20px;
   padding: 10px 14px;
-  background-color: #f4ecf7;
+  background-color: #f4f4f4;
   border-radius: 4px;
   font-size: 12px;
   color: #555;
@@ -197,6 +217,7 @@ textarea { resize: vertical; }
   .grid-2, .grid-3, .scale-grid, .descriptor-grid { grid-template-columns: 1fr; }
   .rubric-table { font-size: 11px; }
 }
+
 /* ── Course selector ── */
 .course-select {
   font-size: 15px;
@@ -234,4 +255,52 @@ textarea { resize: vertical; }
   letter-spacing: 1.5px;
   color: #999;
   margin-bottom: 6px;
+}
+
+/* ── Preview action buttons ── */
+.preview-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-copy {
+  padding: 10px 22px;
+  background-color: #8b1a1a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: Avenir, sans-serif;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+.btn-copy:hover { background-color: #a82424; }
+
+.copy-toast {
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  animation: fadeIn 0.2s ease-in;
+}
+.copy-toast-success {
+  background-color: #eafaf1;
+  color: #1e8449;
+  border: 1px solid #27ae60;
+}
+.copy-toast-error {
+  background-color: #fdecea;
+  color: #c0392b;
+  border: 1px solid #e74c3c;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media print {
+  .btn-copy, .copy-toast { display: none !important; }
 }
