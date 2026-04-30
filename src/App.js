@@ -432,6 +432,7 @@ function App() {
   const [assignmentType, setAssignmentType] = useState('');
   const [teacherName, setTeacherName] = useState('');
   const [criteria, setCriteria] = useState([EMPTY_CRITERION]);
+  const [autoFillReportingCategories, setAutoFillReportingCategories] = useState(true);
 
   const currentCourse = COURSES[selectedCourse] || null;
 
@@ -514,10 +515,12 @@ function App() {
     setCriteria(
       generatedCriteria.map((criterion) => ({
         ...criterion,
-        reportingCategory: getReportingCategoryForOutcome(
-          currentCourse,
-          criterion.learningOutcome
-        ),
+        reportingCategory: autoFillReportingCategories
+          ? getReportingCategoryForOutcome(
+              currentCourse,
+              criterion.learningOutcome
+            )
+          : '',
         descriptors: getDescriptorsForOutcome(criterion.learningOutcome)
       }))
     );
@@ -525,8 +528,12 @@ function App() {
 
   return (
     <div>
-      <div className="header">
-        <h1>HKIS Rubric Creator</h1>
+      <div className="header"> 
+        
+        <h1>
+          <img src="logohkis512.png" width="80" height="80" alt="HKIS Logo" />
+          HKIS Rubric Creator
+        </h1>
       </div>
 
       <div className="app-wrapper">
@@ -599,6 +606,24 @@ function App() {
                     <option key={t}>{t}</option>
                   ))}
                 </select>
+                <label
+                  title="Auto-fill reporting categories when selecting assessment"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    marginTop: '8px',
+                    fontSize: '13px',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={autoFillReportingCategories}
+                    onChange={(e) => setAutoFillReportingCategories(e.target.checked)}
+                  />
+                  Auto-fill reporting categories
+                </label>
               </div>
               <div className="field">
                 <label>Teacher Name</label>
@@ -670,8 +695,6 @@ function App() {
                             {category}
                           </option>
                         ))}
-                      <option value="Interdisciplinary">Interdisciplinary</option>
-                      <option value="Process & Skills">Process & Skills</option>
                     </select>
                   </div>
                   <div className="field">
