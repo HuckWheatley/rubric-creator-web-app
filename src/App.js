@@ -275,142 +275,163 @@ const buildCriteriaFromAssessment = (type, course) => {
   const allOutcomes = course ? Object.values(course.outcomes).flat() : [];
   const startId = Date.now();
 
-  if (type === 'Analytical Essay') {
-    return [
-      createCriterion(startId, 'Thesis & Insight', getOutcomeByIndex(allOutcomes, 0)),
-      createCriterion(startId + 1, 'Evidence & Analysis', getOutcomeByIndex(allOutcomes, 1)),
-      createCriterion(startId + 2, 'Organization & Style', getOutcomeByIndex(allOutcomes, 2)),
-      createCriterion(startId + 3, 'Conventions & Citation', getOutcomeByIndex(allOutcomes, 3))
-    ];
-  }
+  const map = {
+    'Analytical Essay': ['Thesis & Insight', 'Evidence & Analysis', 'Organization & Style', 'Conventions & Citation'],
+    'Timed In-Class Writing': ['Response to Prompt', 'Evidence Under Time', 'Coherence & Control', 'Language Conventions'],
+    'Research Project': ['Inquiry Question', 'Source Integration', 'Analysis & Conclusions', 'Communication of Findings'],
+    'Oral Presentation': ['Content Knowledge', 'Use of Evidence', 'Organization & Clarity', 'Delivery & Engagement'],
+    'Socratic Seminar': ['Preparation', 'Speaking & Listening', 'Reasoning & Evidence', 'Depth of Inquiry'],
+    'Structured Debate': ['Claim & Position', 'Evidence & Rebuttal', 'Organization of Argument', 'Delivery & Teamwork'],
+    'Multimedia Composition': ['Message & Purpose', 'Use of Media Elements', 'Evidence & Accuracy', 'Technical & Design Quality'],
+    'Journal Response': ['Reflection & Insight', 'Connection to Learning', 'Reasoning & Support', 'Writing Clarity'],
+    'Group Project': ['Contribution to Team', 'Collaboration Skills', 'Project Quality', 'Process & Reflection'],
+    'Position Paper': ['Position & Focus', 'Evidence & Counterargument', 'Reasoning & Persuasion', 'Writing Conventions'],
+    'Creative Writing': ['Originality & Voice', 'Craft & Technique', 'Structure & Flow', 'Language Control'],
+    'Literary Analysis': ['Interpretation of Text', 'Use of Quotations', 'Analytical Reasoning', 'Organization & Conventions'],
+    'Rhetorical Analysis': ['Rhetorical Situation', 'Device Analysis', 'Evidence & Explanation', 'Clarity & Academic Style'],
+    'Argument Essay': ['Claim & Thesis', 'Support & Evidence', 'Counterclaim & Rebuttal', 'Organization & Conventions'],
+    'Synthesis Essay': ['Synthesis Thesis', 'Source Integration', 'Comparative Analysis', 'Academic Writing Quality']
+  };
 
-  if (type === 'Timed In-Class Writing') {
-    return [
-      createCriterion(startId, 'Response to Prompt', getOutcomeByIndex(allOutcomes, 0)),
-      createCriterion(startId + 1, 'Evidence Under Time', getOutcomeByIndex(allOutcomes, 1)),
-      createCriterion(startId + 2, 'Coherence & Control', getOutcomeByIndex(allOutcomes, 2)),
-      createCriterion(startId + 3, 'Language Conventions', getOutcomeByIndex(allOutcomes, 3))
-    ];
-  }
+  const names = map[type];
+  if (!names) return [EMPTY_CRITERION];
 
-  if (type === 'Research Project') {
-    return [
-      createCriterion(startId, 'Inquiry Question', getOutcomeByIndex(allOutcomes, 0)),
-      createCriterion(startId + 1, 'Source Integration', getOutcomeByIndex(allOutcomes, 1)),
-      createCriterion(startId + 2, 'Analysis & Conclusions', getOutcomeByIndex(allOutcomes, 2)),
-      createCriterion(startId + 3, 'Communication of Findings', getOutcomeByIndex(allOutcomes, 3))
-    ];
-  }
+  return names.map((n, i) =>
+    createCriterion(startId + i, n, getOutcomeByIndex(allOutcomes, i))
+  );
+};
 
-  if (type === 'Oral Presentation') {
-    return [
-      createCriterion(startId, 'Content Knowledge', getOutcomeByIndex(allOutcomes, 0)),
-      createCriterion(startId + 1, 'Use of Evidence', getOutcomeByIndex(allOutcomes, 1)),
-      createCriterion(startId + 2, 'Organization & Clarity', getOutcomeByIndex(allOutcomes, 2)),
-      createCriterion(startId + 3, 'Delivery & Engagement', getOutcomeByIndex(allOutcomes, 3))
-    ];
-  }
+/* ══════════════════════════════════════════════════════════════
+   Build a Google-Docs-friendly HTML table from current rubric.
+   ══════════════════════════════════════════════════════════════ */
+const escapeHtml = (str = '') =>
+  String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 
-  if (type === 'Socratic Seminar') {
-    return [
-      createCriterion(startId, 'Preparation', getOutcomeByIndex(allOutcomes, 0)),
-      createCriterion(startId + 1, 'Speaking & Listening', getOutcomeByIndex(allOutcomes, 1)),
-      createCriterion(startId + 2, 'Reasoning & Evidence', getOutcomeByIndex(allOutcomes, 2)),
-      createCriterion(startId + 3, 'Depth of Inquiry', getOutcomeByIndex(allOutcomes, 3))
-    ];
-  }
+const buildRubricHtml = ({
+  rubricTitle,
+  selectedCourse,
+  assignmentType,
+  teacherName,
+  criteria
+}) => {
+  const titleBlock = `
+    <div style="font-family:Arial,sans-serif;margin-bottom:12px;">
+      <div style="font-size:10pt;letter-spacing:1.5px;color:#888;text-transform:uppercase;">
+        HKIS Humanities Department
+      </div>
+      <div style="font-size:18pt;color:${CRITERION_COLOR.header};font-weight:bold;margin-top:4px;">
+        ${escapeHtml(rubricTitle || 'Untitled Rubric')}
+      </div>
+      <div style="font-size:10pt;color:#666;margin-top:4px;">
+        ${escapeHtml(selectedCourse || 'No course selected')}${
+    assignmentType ? ' · ' + escapeHtml(assignmentType) : ''
+  }${teacherName ? ' · ' + escapeHtml(teacherName) : ''}
+      </div>
+    </div>
+  `;
 
-  if (type === 'Structured Debate') {
-    return [
-      createCriterion(startId, 'Claim & Position', getOutcomeByIndex(allOutcomes, 0)),
-      createCriterion(startId + 1, 'Evidence & Rebuttal', getOutcomeByIndex(allOutcomes, 1)),
-      createCriterion(startId + 2, 'Organization of Argument', getOutcomeByIndex(allOutcomes, 2)),
-      createCriterion(startId + 3, 'Delivery & Teamwork', getOutcomeByIndex(allOutcomes, 3))
-    ];
-  }
+  // Criterion header gets its own warm-brown color, then BLACK divider, then the four scale headers
+  // each separated from the next by another BLACK divider.
+  const headerRow = `
+    <tr>
+      <th style="background-color:${CRITERION_COLOR.header};color:#ffffff;padding:8px;border:1px solid #000000;border-right:2px solid #000000;text-align:left;font-family:Arial,sans-serif;font-size:11pt;width:18%;">Criterion</th>
+      ${HKIS_LEVELS.map(
+        (l, idx) => `
+        <th style="background-color:${l.borderColor};color:#ffffff;padding:8px;border:1px solid #000000;${
+          idx < HKIS_LEVELS.length - 1 ? 'border-right:2px solid #000000;' : ''
+        }text-align:center;font-family:Arial,sans-serif;font-size:11pt;">
+          ${escapeHtml(l.name)}
+        </th>`
+      ).join('')}
+    </tr>
+  `;
 
-  if (type === 'Multimedia Composition') {
-    return [
-      createCriterion(startId, 'Message & Purpose', getOutcomeByIndex(allOutcomes, 0)),
-      createCriterion(startId + 1, 'Use of Media Elements', getOutcomeByIndex(allOutcomes, 1)),
-      createCriterion(startId + 2, 'Evidence & Accuracy', getOutcomeByIndex(allOutcomes, 2)),
-      createCriterion(startId + 3, 'Technical & Design Quality', getOutcomeByIndex(allOutcomes, 3))
-    ];
-  }
+  const bodyRows = criteria
+    .map((c, idx) => {
+      const stripeBg = idx % 2 === 0 ? '#ffffff' : '#fafafa';
+      const criterionCell = `
+        <td style="background-color:${CRITERION_COLOR.wash};padding:10px;border:1px solid #000000;border-right:2px solid #000000;border-left:4px solid ${CRITERION_COLOR.accent};vertical-align:top;font-family:Arial,sans-serif;font-size:10pt;width:18%;">
+          <div style="font-weight:bold;color:${CRITERION_COLOR.header};margin-bottom:4px;">
+            ${escapeHtml(c.name || `Criterion ${idx + 1}`)}
+          </div>
+          ${
+            c.reportingCategory
+              ? `<div style="font-size:9pt;color:${CRITERION_COLOR.accent};font-weight:bold;margin-bottom:2px;">Reporting Category: ${escapeHtml(
+                  c.reportingCategory
+                )}</div>`
+              : ''
+          }
+          ${
+            c.learningOutcome
+              ? `<div style="font-size:9pt;color:#777;font-style:italic;">${escapeHtml(
+                  c.learningOutcome
+                )}</div>`
+              : ''
+          }
+        </td>
+      `;
 
-  if (type === 'Journal Response') {
-    return [
-      createCriterion(startId, 'Reflection & Insight', getOutcomeByIndex(allOutcomes, 0)),
-      createCriterion(startId + 1, 'Connection to Learning', getOutcomeByIndex(allOutcomes, 1)),
-      createCriterion(startId + 2, 'Reasoning & Support', getOutcomeByIndex(allOutcomes, 2)),
-      createCriterion(startId + 3, 'Writing Clarity', getOutcomeByIndex(allOutcomes, 3))
-    ];
-  }
+      const descriptorCells = HKIS_LEVELS.map((l, levelIdx) => {
+        const text = c.descriptors[l.name] || '—';
+        return `
+          <td style="background-color:${stripeBg};padding:10px;border:1px solid #000000;${
+            levelIdx < HKIS_LEVELS.length - 1 ? 'border-right:2px solid #000000;' : ''
+          }vertical-align:top;font-family:Arial,sans-serif;font-size:10pt;line-height:1.45;">
+            ${escapeHtml(text)}
+          </td>
+        `;
+      }).join('');
 
-  if (type === 'Group Project') {
-    return [
-      createCriterion(startId, 'Contribution to Team', getOutcomeByIndex(allOutcomes, 0)),
-      createCriterion(startId + 1, 'Collaboration Skills', getOutcomeByIndex(allOutcomes, 1)),
-      createCriterion(startId + 2, 'Project Quality', getOutcomeByIndex(allOutcomes, 2)),
-      createCriterion(startId + 3, 'Process & Reflection', getOutcomeByIndex(allOutcomes, 3))
-    ];
-  }
+      return `<tr>${criterionCell}${descriptorCells}</tr>`;
+    })
+    .join('');
 
-  if (type === 'Position Paper') {
-    return [
-      createCriterion(startId, 'Position & Focus', getOutcomeByIndex(allOutcomes, 0)),
-      createCriterion(startId + 1, 'Evidence & Counterargument', getOutcomeByIndex(allOutcomes, 1)),
-      createCriterion(startId + 2, 'Reasoning & Persuasion', getOutcomeByIndex(allOutcomes, 2)),
-      createCriterion(startId + 3, 'Writing Conventions', getOutcomeByIndex(allOutcomes, 3))
-    ];
-  }
+  const table = `
+    <table style="border-collapse:collapse;width:100%;font-family:Arial,sans-serif;border:2px solid #000000;" cellspacing="0" cellpadding="0">
+      <thead>${headerRow}</thead>
+      <tbody>${bodyRows}</tbody>
+    </table>
+  `;
 
-  if (type === 'Creative Writing') {
-    return [
-      createCriterion(startId, 'Originality & Voice', getOutcomeByIndex(allOutcomes, 0)),
-      createCriterion(startId + 1, 'Craft & Technique', getOutcomeByIndex(allOutcomes, 1)),
-      createCriterion(startId + 2, 'Structure & Flow', getOutcomeByIndex(allOutcomes, 2)),
-      createCriterion(startId + 3, 'Language Control', getOutcomeByIndex(allOutcomes, 3))
-    ];
-  }
+  const footer = `
+    <div style="margin-top:10px;padding:8px 10px;background-color:#f4f4f4;font-family:Arial,sans-serif;font-size:9pt;color:#555;">
+      <b>HKIS General Academic Scale:</b> Emerging → Developing → Exhibiting → Exhibiting Depth
+    </div>
+  `;
 
-  if (type === 'Literary Analysis') {
-    return [
-      createCriterion(startId, 'Interpretation of Text', getOutcomeByIndex(allOutcomes, 0)),
-      createCriterion(startId + 1, 'Use of Quotations', getOutcomeByIndex(allOutcomes, 1)),
-      createCriterion(startId + 2, 'Analytical Reasoning', getOutcomeByIndex(allOutcomes, 2)),
-      createCriterion(startId + 3, 'Organization & Conventions', getOutcomeByIndex(allOutcomes, 3))
-    ];
-  }
+  return `<div>${titleBlock}${table}${footer}</div>`;
+};
 
-  if (type === 'Rhetorical Analysis') {
-    return [
-      createCriterion(startId, 'Rhetorical Situation', getOutcomeByIndex(allOutcomes, 0)),
-      createCriterion(startId + 1, 'Device Analysis', getOutcomeByIndex(allOutcomes, 1)),
-      createCriterion(startId + 2, 'Evidence & Explanation', getOutcomeByIndex(allOutcomes, 2)),
-      createCriterion(startId + 3, 'Clarity & Academic Style', getOutcomeByIndex(allOutcomes, 3))
-    ];
-  }
+const buildRubricPlainText = ({
+  rubricTitle,
+  selectedCourse,
+  assignmentType,
+  teacherName,
+  criteria
+}) => {
+  const lines = [];
+  lines.push('HKIS HUMANITIES DEPARTMENT');
+  lines.push((rubricTitle || 'Untitled Rubric').toUpperCase());
+  const meta = [selectedCourse, assignmentType, teacherName].filter(Boolean).join(' · ');
+  if (meta) lines.push(meta);
+  lines.push('');
 
-  if (type === 'Argument Essay') {
-    return [
-      createCriterion(startId, 'Claim & Thesis', getOutcomeByIndex(allOutcomes, 0)),
-      createCriterion(startId + 1, 'Support & Evidence', getOutcomeByIndex(allOutcomes, 1)),
-      createCriterion(startId + 2, 'Counterclaim & Rebuttal', getOutcomeByIndex(allOutcomes, 2)),
-      createCriterion(startId + 3, 'Organization & Conventions', getOutcomeByIndex(allOutcomes, 3))
-    ];
-  }
+  criteria.forEach((c, idx) => {
+    lines.push(`CRITERION ${idx + 1}: ${c.name || ''}`);
+    if (c.reportingCategory) lines.push(`  Reporting Category: ${c.reportingCategory}`);
+    if (c.learningOutcome) lines.push(`  Learning Outcome: ${c.learningOutcome}`);
+    HKIS_LEVELS.forEach((l) => {
+      lines.push(`  • ${l.name}: ${c.descriptors[l.name] || '—'}`);
+    });
+    lines.push('');
+  });
 
-  if (type === 'Synthesis Essay') {
-    return [
-      createCriterion(startId, 'Synthesis Thesis', getOutcomeByIndex(allOutcomes, 0)),
-      createCriterion(startId + 1, 'Source Integration', getOutcomeByIndex(allOutcomes, 1)),
-      createCriterion(startId + 2, 'Comparative Analysis', getOutcomeByIndex(allOutcomes, 2)),
-      createCriterion(startId + 3, 'Academic Writing Quality', getOutcomeByIndex(allOutcomes, 3))
-    ];
-  }
-
-  return [EMPTY_CRITERION];
+  lines.push('HKIS General Academic Scale: Emerging → Developing → Exhibiting → Exhibiting Depth');
+  return lines.join('\n');
 };
 
 function App() {
@@ -420,6 +441,7 @@ function App() {
   const [assignmentType, setAssignmentType] = useState('');
   const [teacherName, setTeacherName] = useState('');
   const [criteria, setCriteria] = useState([EMPTY_CRITERION]);
+  const [copyStatus, setCopyStatus] = useState('');
 
   const currentCourse = COURSES[selectedCourse] || null;
 
@@ -491,12 +513,10 @@ function App() {
     setCriteria(
       generatedCriteria.map((criterion) => ({
         ...criterion,
-        reportingCategory: autoFillReportingCategories
-          ? getReportingCategoryForOutcome(
-              currentCourse,
-              criterion.learningOutcome
-            )
-          : '',
+        reportingCategory: getReportingCategoryForOutcome(
+          currentCourse,
+          criterion.learningOutcome
+        ),
         descriptors: getDescriptorsForOutcome(criterion.learningOutcome)
       }))
     );
@@ -556,12 +576,8 @@ function App() {
 
   return (
     <div>
-      <div className="header"> 
-        
-        <h1>
-          <img src="logohkis512.png" width="80" height="80" alt="HKIS Logo" />
-          HKIS Rubric Creator
-        </h1>
+      <div className="header">
+        <h1>HKIS Rubric Creator</h1>
       </div>
 
       <div className="app-wrapper">
@@ -608,7 +624,6 @@ function App() {
               )}
             </div>
 
-            {/* Rubric Details */}
             <div className="card">
               <h2 className="card-title">Rubric Details</h2>
               <div className="grid-3">
@@ -705,6 +720,8 @@ function App() {
                             {category}
                           </option>
                         ))}
+                      <option value="Interdisciplinary">Interdisciplinary</option>
+                      <option value="Process & Skills">Process & Skills</option>
                     </select>
                   </div>
                   <div className="field">
