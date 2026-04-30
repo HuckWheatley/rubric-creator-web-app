@@ -432,6 +432,7 @@ function App() {
   const [assignmentType, setAssignmentType] = useState('');
   const [teacherName, setTeacherName] = useState('');
   const [criteria, setCriteria] = useState([EMPTY_CRITERION]);
+  const [autoFillReportingCategories, setAutoFillReportingCategories] = useState(true);
 
   const currentCourse = COURSES[selectedCourse] || null;
 
@@ -611,7 +612,7 @@ function App() {
                   <input
                     value={teacherName}
                     onChange={(e) => setTeacherName(e.target.value)}
-                    placeholder="e.g., Ms. Chan"
+                    placeholder="e.g., Mr. Zen"
                   />
                 </div>
               </div>
