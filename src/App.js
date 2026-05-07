@@ -549,7 +549,7 @@ function App() {
   const [assignmentType, setAssignmentType] = useState('');
   const [teacherName, setTeacherName] = useState('');
   const [criteria, setCriteria] = useState([EMPTY_CRITERION]);
-  const [autoFillReportingCategories, setAutoFillReportingCategories] = useState(true);
+  const [autoFillReportingCategories] = useState(true);
   const [copyStatus, setCopyStatus] = useState('');
 
   const currentCourse = COURSES[selectedCourse] || null;
