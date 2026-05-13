@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
+import { useAuth } from './AuthContext';
+import Login from './Login';
+import LogoutButton from './LogoutButton';
 
 const HKIS_LEVELS = [
   {
@@ -543,6 +546,7 @@ const buildRubricPlainText = ({
 };
 
 function App() {
+  const { user, loading, error } = useAuth();
   const [activeTab, setActiveTab] = useState('build');
   const [selectedCourse, setSelectedCourse] = useState('');
   const [rubricTitle, setRubricTitle] = useState('');
@@ -553,6 +557,49 @@ function App() {
   const [copyStatus, setCopyStatus] = useState('');
 
   const currentCourse = COURSES[selectedCourse] || null;
+
+  if (loading) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        fontSize: '18px',
+        color: '#666'
+      }}>
+        Loading...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        backgroundColor: '#fadbd8'
+      }}>
+        <div style={{
+          padding: '40px',
+          backgroundColor: 'white',
+          borderRadius: '8px',
+          textAlign: 'center',
+          maxWidth: '400px'
+        }}>
+          <h2 style={{ color: '#922b21' }}>Access Denied</h2>
+          <p style={{ color: '#666', marginBottom: '20px' }}>{error}</p>
+          <Login />
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Login />;
+  }
 
   const addCriterion = () => {
     setCriteria([
@@ -695,6 +742,12 @@ function App() {
           <img src="logohkis512.png" width="80" height="80" alt="HKIS Logo" />
           HKIS Rubric Creator
         </h1>
+        <div style={{ position: 'absolute', top: '20px', right: '20px' }}>
+          <span style={{ marginRight: '15px', color: '#666', fontSize: '14px' }}>
+            {user.email}
+          </span>
+          <LogoutButton />
+        </div>
       </div>
 
       <div className="app-wrapper">
