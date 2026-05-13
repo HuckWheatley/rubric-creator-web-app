@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
-import { auth, googleProvider } from './firebase';
+import React, { useState } from 'react';
 import './App.css';
 
 const HKIS_LEVELS = [
@@ -545,103 +543,16 @@ const buildRubricPlainText = ({
 };
 
 function App() {
-  const [authUser, setAuthUser] = useState(null);
-  const [authLoading, setAuthLoading] = useState(true);
-  const [authError, setAuthError] = useState('');
   const [activeTab, setActiveTab] = useState('build');
   const [selectedCourse, setSelectedCourse] = useState('');
   const [rubricTitle, setRubricTitle] = useState('');
   const [assignmentType, setAssignmentType] = useState('');
   const [teacherName, setTeacherName] = useState('');
   const [criteria, setCriteria] = useState([EMPTY_CRITERION]);
-  const [autoFillReportingCategories] = useState(true);
+  const [autoFillReportingCategories, setAutoFillReportingCategories] = useState(true);
   const [copyStatus, setCopyStatus] = useState('');
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        setAuthUser(null);
-        setAuthError('');
-        setAuthLoading(false);
-        return;
-      }
-
-      const email = user.email || '';
-      if (!email.toLowerCase().endsWith('@hkis.edu.hk')) {
-        setAuthUser(null);
-        setAuthError('Please sign in with your HKIS Google account using an @hkis.edu.hk email address.');
-        await signOut(auth);
-        setAuthLoading(false);
-        return;
-      }
-
-      setAuthUser(user);
-      setAuthError('');
-      setAuthLoading(false);
-    });
-
-    return unsubscribe;
-  }, []);
-
   const currentCourse = COURSES[selectedCourse] || null;
-
-  const handleGoogleSignIn = async () => {
-    setAuthError('');
-
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const email = result.user?.email || '';
-
-      if (!email.toLowerCase().endsWith('@hkis.edu.hk')) {
-        setAuthError('Please sign in with your HKIS Google account using an @hkis.edu.hk email address.');
-        await signOut(auth);
-      }
-    } catch (error) {
-      if (error?.code === 'auth/popup-closed-by-user') {
-        return;
-      }
-
-      setAuthError('Google sign-in failed. Make sure popups are allowed and try again.');
-    }
-  };
-
-  if (authLoading) {
-    return (
-      <div className="auth-screen">
-        <div className="auth-card">
-          <div className="auth-kicker">HKIS Rubric Creator</div>
-          <h1>Checking your account</h1>
-          <p>Verifying access with HKIS Google sign-in.</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!authUser) {
-    return (
-      <div className="auth-screen">
-        <div className="auth-card">
-          <div className="auth-brand">
-            <img src="logohkis512.png" width="72" height="72" alt="HKIS Logo" />
-            <div>
-              <div className="auth-kicker">HKIS Rubric Creator</div>
-              <h1>Sign in to continue</h1>
-            </div>
-          </div>
-          <p className="auth-copy">
-            Access is limited to users signed in with an HKIS Google account.
-          </p>
-          {authError && <div className="auth-error">{authError}</div>}
-          <button className="auth-btn" onClick={handleGoogleSignIn}>
-            Continue with Google
-          </button>
-          <div className="auth-note">
-            You must use an email ending in @hkis.edu.hk to enter the page.
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   const addCriterion = () => {
     setCriteria([
@@ -784,9 +695,6 @@ function App() {
           <img src="logohkis512.png" width="80" height="80" alt="HKIS Logo" />
           HKIS Rubric Creator
         </h1>
-        <button className="sign-out-btn" onClick={() => signOut(auth)}>
-          Sign out
-        </button>
       </div>
 
       <div className="app-wrapper">
