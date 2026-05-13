@@ -7,113 +7,6 @@ body {
   color: #333;
 }
 
-.auth-screen {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-  background:
-    radial-gradient(circle at top left, rgba(1, 42, 66, 0.14), transparent 34%),
-    radial-gradient(circle at top right, rgba(139, 26, 26, 0.12), transparent 28%),
-    linear-gradient(180deg, #f8f5ef 0%, #efe9de 100%);
-}
-
-.auth-card {
-  width: min(560px, 100%);
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(1, 42, 66, 0.12);
-  border-radius: 20px;
-  padding: 32px;
-  box-shadow: 0 24px 80px rgba(1, 42, 66, 0.16);
-  backdrop-filter: blur(8px);
-}
-
-.auth-brand {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.auth-brand img {
-  border-radius: 16px;
-  box-shadow: 0 10px 24px rgba(1, 42, 66, 0.14);
-}
-
-.auth-kicker {
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #8b1a1a;
-  font-weight: bold;
-}
-
-.auth-card h1 {
-  font-size: 32px;
-  line-height: 1.1;
-  color: #012a42;
-  margin: 10px 0 12px;
-}
-
-.auth-card p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #4f5b66;
-}
-
-.auth-copy {
-  margin: 18px 0 0;
-}
-
-.auth-error {
-  margin-top: 18px;
-  padding: 12px 14px;
-  border-radius: 10px;
-  background: #fdecea;
-  border: 1px solid #f3b7b0;
-  color: #8b1a1a;
-  font-size: 14px;
-}
-
-.auth-btn {
-  width: 100%;
-  margin-top: 20px;
-  padding: 14px 18px;
-  border: none;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #012a42 0%, #0b4c74 100%);
-  color: white;
-  font-family: Avenir, sans-serif;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 14px 28px rgba(1, 42, 66, 0.2);
-}
-
-.auth-btn:hover {
-  filter: brightness(1.05);
-}
-
-.auth-note {
-  margin-top: 14px;
-  font-size: 13px;
-  color: #6b7280;
-}
-
-.sign-out-btn {
-  padding: 10px 16px;
-  background: rgba(255, 255, 255, 0.12);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 999px;
-  cursor: pointer;
-  font-family: Avenir, sans-serif;
-  font-size: 13px;
-}
-
-.sign-out-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
 .app-wrapper {
   max-width: 1200px;
   margin: 0 auto;
@@ -127,10 +20,6 @@ body {
   padding: 24px 28px;
   font-weight: bold;
   margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
 }
 .header h1 {
   font-size: 26px;
