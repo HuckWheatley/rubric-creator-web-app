@@ -1,5 +1,9 @@
 Collaborated on with Delcan Ng - Made for Teachers at Hong Kong International School
 
+The site is currently completly functional, we accomplsihed all our original goals, users can edit rubrics, fill in text automatically and copy and paste their finished rubrics in easily, we havent found any buggy code or large errors in our work. 
+Our teacher client for this project reccomended we expand this project by adding more grading standards from diffirent departments into our project, the office should be contacted for this information, or personally contact teachers in other departments if you dont want to expand into all departments, this is the highest priority next step. Easy changes are an information window that pops up to explain to users how to use the website, and a "no-fill" item for assignments that gives the teachers the option to not automatically fill out text in their rubrics when an assignment is selected. Harder features that arent the highest priority one I described is a database that stores made rubrics, and if that is made, a sign in feature so that only people with in our organization could use it. Be careful with complexity, the app is helpful because it is simple this is the most important part of the app, and when using AI, limit it to using it to fill in text from rubrics as AI is better at repeating prexisting code already written, then it is writing new code.
+
+
 
 # Getting Started with Create React App
 
